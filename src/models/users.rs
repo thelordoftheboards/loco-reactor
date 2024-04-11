@@ -82,8 +82,13 @@ impl super::_entities::users::Model {
     ///
     /// When could not find user by the given token or DB query error
     pub async fn find_by_email(db: &DatabaseConnection, email: &str) -> ModelResult<Self> {
+        // Translate the email to lower case. This ensures that when checking if an email is already
+        // registered, it can not be re-used by supplying a variation that differs only in the case
+        // of the letters.
+        let email_lc = email.to_lowercase();
+
         let user = users::Entity::find()
-            .filter(users::Column::Email.eq(email))
+            .filter(users::Column::Email.eq(email_lc))
             .one(db)
             .await?;
         user.ok_or_else(|| ModelError::EntityNotFound)
@@ -167,10 +172,16 @@ impl super::_entities::users::Model {
     ) -> ModelResult<Self> {
         let txn = db.begin().await?;
 
-        // TODO In create_with_password it IS possible to create another user with same email, if the case of the letters is different. This should be disallowed. Changing the username/email to all lowercase should help with that since it will allow to remove all differences in case.
+
+        // Translate the email to lower case. This ensures that when checking if an email is already
+        // registered, it can not be re-used by supplying a variation that differs only in the case
+        // of the letters.
+        let email_lc = &params.email.to_lowercase();
+
+                // TODO Validate email_lc with regular expression to ensure it is a valid email
 
         if users::Entity::find()
-            .filter(users::Column::Email.eq(&params.email))
+            .filter(users::Column::Email.eq(email_lc))
             .one(&txn)
             .await?
             .is_some()
@@ -181,7 +192,7 @@ impl super::_entities::users::Model {
         let password_hash =
             hash::hash_password(&params.password).map_err(|e| ModelError::Any(e.into()))?;
         let user = users::ActiveModel {
-            email: ActiveValue::set(params.email.to_string()),
+            email: ActiveValue::set(email_lc.to_string()),
             password: ActiveValue::set(password_hash),
             name: ActiveValue::set(params.name.to_string()),
             ..Default::default()

@@ -41,12 +41,17 @@ async fn register(
 ) -> Result<Response> {
     let res = users::Model::create_with_password(&ctx.db, &params).await;
 
+          // Translate the email to lower case. This ensures that when checking if an email is already
+    // registered, it can not be re-used by supplying a variation that differs only in the case
+    // of the letters.
+    let email_lc = &params.email.to_lowercase();
+
     let user = match res {
         Ok(user) => user,
         Err(err) => {
             tracing::info!(
                 message = err.to_string(),
-                user_email = &params.email,
+                user_email = &email_lc,
                 "auth::register failed to register user",
             );
 

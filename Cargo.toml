@@ -47,3 +47,9 @@ serial_test = "2.0.0"
 rstest = "0.18.2"
 loco-rs = { version = "0.3.1", features = ["testing"] }
 insta = { version = "1.34.0", features = ["redactions", "yaml", "filters"] }
+
+[dev-dependencies.cargo-husky]
+version = "1.5.0"
+default-features = false # Disable features which are enabled by default
+features = ["precommit-hook", "run-cargo-fmt"]
+# TODO Add more git hooks per https://github.com/rhysd/cargo-husky#customize-behavior
