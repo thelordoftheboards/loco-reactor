@@ -1,5 +1,5 @@
-use loco_reactor::{app::App, models::_entities::notes::Entity};
 use insta::{assert_debug_snapshot, with_settings};
+use loco_reactor::{app::App, models::_entities::notes::Entity};
 use loco_rs::testing;
 use sea_orm::entity::prelude::*;
 use serial_test::serial;

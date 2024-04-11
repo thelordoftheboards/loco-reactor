@@ -1,4 +1,4 @@
-# Loco-Reactor
+# ![Logo](./frontend/public/images/favicon.svg) Loco-Reactor
 
 > Tokio, from my heart through my soul feel the energy flow
 
