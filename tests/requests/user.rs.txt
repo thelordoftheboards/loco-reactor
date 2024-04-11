@@ -38,3 +38,5 @@ async fn can_get_current_user() {
     })
     .await;
 }
+
+// TODO: Fix and reinstate test user

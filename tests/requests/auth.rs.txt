@@ -190,3 +190,5 @@ async fn can_reset_password() {
     })
     .await;
 }
+
+// TODO: Fix and reinstate test auth

@@ -1,6 +1,4 @@
-mod auth;
+//mod auth;
 mod notes;
-mod prepare_data;
-mod user;
-
-pub mod guide;
+//mod prepare_data;
+//mod user;
