@@ -1,4 +1,4 @@
-use crazytrain::{app::App, models::users};
+use loco_reactor::{app::App, models::users};
 use insta::{assert_debug_snapshot, with_settings};
 use loco_rs::testing;
 use rstest::rstest;

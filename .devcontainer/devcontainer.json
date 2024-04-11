@@ -1,10 +1,23 @@
 {
-    "name": "LocoReactor",
+    "name": "loco-reactor",
     "dockerComposeFile": "docker-compose.yml",
     "service": "app",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         3000,
         3001
-    ]
+    ],
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "gruntfuggly.todo-tree",
+                "esbenp.prettier-vscode",
+                "plylrnsdy.run-as",
+                "rust-lang.rust-analyzer",
+                "serayuzgur.crates",
+                "tamasfe.even-better-toml",
+                "vadimcn.vscode-lldb"
+            ]
+        }
+    }
 }

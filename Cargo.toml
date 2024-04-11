@@ -1,7 +1,7 @@
 [workspace]
 
 [package]
-name = "crazytrain"
+name = "loco-reactor"
 version = "0.1.0"
 edition = "2021"
 
@@ -38,7 +38,7 @@ unic-langid = "0.9.4"
 # /view engine
 
 [[bin]]
-name = "crazytrain-cli"
+name = "loco-reactor-cli"
 path = "src/bin/main.rs"
 required-features = []
 

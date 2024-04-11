@@ -1,4 +1,4 @@
-use crazytrain::{
+use loco_reactor::{
     app::App,
     models::users::{self, Model, RegisterParams},
 };

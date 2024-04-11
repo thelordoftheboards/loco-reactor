@@ -15,7 +15,7 @@
 //! ```
 use std::collections::BTreeMap;
 
-use crazytrain::app::App;
+use loco_reactor::app::App;
 use loco_rs::{db, prelude::*};
 use migration::Migrator;
 
