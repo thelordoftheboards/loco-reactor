@@ -50,7 +50,6 @@ impl Hooks for App {
 
     fn routes(_ctx: &AppContext) -> AppRoutes {
         AppRoutes::with_default_routes()
-            .add_route(controllers::guide::routes())
             .prefix("/api")
             .add_route(controllers::notes::routes())
             .add_route(controllers::auth::routes())

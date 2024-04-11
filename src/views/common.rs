@@ -15,15 +15,3 @@ impl ErrorResponse {
         }
     }
 }
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct OKResponse {
-    pub ok: bool,
-}
-
-impl OKResponse {
-    #[must_use]
-    pub fn new() -> Self {
-        Self { ok: true }
-    }
-}
