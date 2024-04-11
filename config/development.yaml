@@ -81,7 +81,7 @@ server:
       precompressed: false
       folder:
         uri: "/"
-        path: "frontend/dist"
+        path: "frontend/dist/index.html"
       fallback: "frontend/dist/index.html"
 
 # Worker Configuration
