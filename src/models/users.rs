@@ -172,13 +172,12 @@ impl super::_entities::users::Model {
     ) -> ModelResult<Self> {
         let txn = db.begin().await?;
 
-
         // Translate the email to lower case. This ensures that when checking if an email is already
         // registered, it can not be re-used by supplying a variation that differs only in the case
         // of the letters.
         let email_lc = &params.email.to_lowercase();
 
-                // TODO Validate email_lc with regular expression to ensure it is a valid email
+        // TODO Validate email_lc with regular expression to ensure it is a valid email
 
         if users::Entity::find()
             .filter(users::Column::Email.eq(email_lc))
