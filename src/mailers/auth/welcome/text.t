@@ -3,7 +3,7 @@ Hello {{name}},
   Welcome to Loco Reactor! Your account has been created.
   Before you get started, please verify your account by clicking the link below:
 
-    http://{{domain}}/auth/verify?{{verifyToken}}
+    http://{{domain}}/auth/verify?code={{verifyToken}}
 
   Alternatively, you can visit
     http://{{domain}}/auth/verify

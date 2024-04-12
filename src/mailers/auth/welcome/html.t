@@ -8,7 +8,7 @@
     Before you get started, please verify your account by clicking the link below:
   </p>
   <p>
-    <a href="http://{{domain}}/auth/verify?{{verifyToken}}">
+    <a href="http://{{domain}}/auth/verify?code={{verifyToken}}">
       Verify Your Account
     </a>
   </p>

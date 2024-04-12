@@ -6,11 +6,15 @@ import { Navigate } from 'react-router-dom'
 export const withAuthedUser = (Component: FC<any>) => (props: any) => {
   const authedUser = useAuthedUser()
 
+  // Verify that the user is authed, and if not send them to the sign-in page
   if (!(authedUser && authedUser.user && authedUser.user.pid)) {
     return <Navigate to='/sign-in' replace={true} />
   }
 
-  // TODO Verify that the authed user is validated, and if not send them to a validation/verify page.
+  // Verify that the authed user email is verified, and if not send them to the verification page.
+  if (!authedUser.user.is_verified) {
+    return <Navigate to='/auth/verify' replace={true} />
+  }
 
   return <Component authedUser={authedUser} {...props} />
 }

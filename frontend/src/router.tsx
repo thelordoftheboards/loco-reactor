@@ -29,6 +29,12 @@ const router = createBrowserRouter([
       Component: (await import('./pages/auth/forgot-password')).default,
     }),
   },
+  {
+    path: '/auth/verify',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/verify')).default,
+    }),
+  },
 
   // Main routes
   {
