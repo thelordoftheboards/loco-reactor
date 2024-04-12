@@ -139,7 +139,10 @@ async fn forgot(
 }
 
 /// Reset user password by the given parameters
-async fn reset(State(ctx): State<AppContext>, Json(params): Json<AuthResetParams>) -> Result<Json<()>> {
+async fn reset(
+    State(ctx): State<AppContext>,
+    Json(params): Json<AuthResetParams>,
+) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller

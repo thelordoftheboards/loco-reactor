@@ -1,2 +1,3 @@
 [alias]
+dev = "run start --server-and-worker"
 loco = "run --"
