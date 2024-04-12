@@ -30,7 +30,7 @@ async fn can_register() {
             "password": "12341234"
         });
 
-        let _response = request.post("/api/auth/register").json(&payload).await;
+        let _response = request.post("/api/auth/sign-up").json(&payload).await;
         let saved_user = users::Model::find_by_email(&ctx.db, email).await;
 
         with_settings!({
@@ -66,7 +66,7 @@ async fn can_login_with_verify(#[case] test_name: &str, #[case] password: &str) 
 
         //Creating a new user
         _ = request
-            .post("/api/auth/register")
+            .post("/api/auth/sign-up")
             .json(&register_payload)
             .await;
 
@@ -78,7 +78,7 @@ async fn can_login_with_verify(#[case] test_name: &str, #[case] password: &str) 
 
         //verify user request
         let response = request
-            .post("/api/auth/login")
+            .post("/api/auth/sign-in")
             .json(&serde_json::json!({
                 "email": email,
                 "password": password
@@ -117,13 +117,13 @@ async fn can_login_without_verify() {
 
         //Creating a new user
         _ = request
-            .post("/api/auth/register")
+            .post("/api/auth/sign-up")
             .json(&register_payload)
             .await;
 
         //verify user request
         let response = request
-            .post("/api/auth/login")
+            .post("/api/auth/sign-in")
             .json(&serde_json::json!({
                 "email": email,
                 "password": password
@@ -173,7 +173,7 @@ async fn can_reset_password() {
         assert_debug_snapshot!((reset_response.status_code(), reset_response.text()));
 
         let response = request
-            .post("/api/auth/login")
+            .post("/api/auth/sign-in")
             .json(&serde_json::json!({
                 "email": user.email,
                 "password": new_password

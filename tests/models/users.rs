@@ -1,7 +1,7 @@
 use insta::assert_debug_snapshot;
 use loco_reactor::{
     app::App,
-    models::users::{self, Model, RegisterParams},
+    models::users::{self, AuthSignUpParams, Model},
 };
 use loco_rs::{model::ModelError, testing};
 use sea_orm::{ActiveModelTrait, ActiveValue, IntoActiveModel};
@@ -41,7 +41,7 @@ async fn can_create_with_password() {
 
     let boot = testing::boot_test::<App>().await.unwrap();
 
-    let params = RegisterParams {
+    let params = AuthSignUpParams {
         email: "test@framework.com".to_string(),
         password: "1234".to_string(),
         name: "framework".to_string(),
@@ -65,7 +65,7 @@ async fn handle_create_with_password_with_duplicate() {
 
     let new_user: Result<Model, ModelError> = Model::create_with_password(
         &boot.app_context.db,
-        &RegisterParams {
+        &AuthSignUpParams {
             email: "user1@example.com".to_string(),
             password: "1234".to_string(),
             name: "framework".to_string(),

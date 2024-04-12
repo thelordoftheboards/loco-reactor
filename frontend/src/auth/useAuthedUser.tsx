@@ -8,11 +8,13 @@ async function getUserEmpty(): Promise<AuthedUser | null> {
 }
 
 export interface AuthedUser {
-  is_verified: boolean
-  name: string
-  initials: string
-  pid: string
+  // Received from API
   token: string
+  pid: string
+  name: string
+  is_verified: boolean
+  // Calculated
+  initials: string
 }
 
 interface IUseAuthedUser {

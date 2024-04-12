@@ -1,43 +1,40 @@
+use axum::{http::StatusCode, response::Response};
 use loco_rs::model::ModelError;
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
-
-// TODO Move this use statement to the prelude if possible
-use axum::{http::StatusCode, response::Response};
-
 use serde_json::json;
 
 use crate::{
     mailers::auth::AuthMailer,
     models::{
         _entities::users,
-        users::{LoginParams, RegisterParams},
+        users::{AuthSignInParams, AuthSignUpParams},
     },
-    views::auth::LoginResponse,
+    views::auth::AuthedUserResponse,
     views::common::ErrorResponse,
 };
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct VerifyParams {
+pub struct AuthVerifyParams {
     pub token: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ForgotParams {
+pub struct AuthForgotParams {
     pub email: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct ResetParams {
+pub struct AuthResetParams {
     pub token: String,
     pub password: String,
 }
 
-/// Register function creates a new user with the given parameters and sends a
+/// Creates a new user with the given parameters and sends a
 /// welcome email to the user
-async fn register(
+async fn sign_up(
     State(ctx): State<AppContext>,
-    Json(params): Json<RegisterParams>,
+    Json(params): Json<AuthSignUpParams>,
 ) -> Result<Response> {
     let res = users::Model::create_with_password(&ctx.db, &params).await;
 
@@ -93,7 +90,7 @@ async fn register(
 
     Ok((
         StatusCode::OK,
-        Json(json!(LoginResponse::new(&user, &token))),
+        Json(json!(AuthedUserResponse::new(&user, &token))),
     )
         .into_response())
 }
@@ -102,7 +99,7 @@ async fn register(
 /// the system.
 async fn verify(
     State(ctx): State<AppContext>,
-    Json(params): Json<VerifyParams>,
+    Json(params): Json<AuthVerifyParams>,
 ) -> Result<Json<()>> {
     let user = users::Model::find_by_verification_token(&ctx.db, &params.token).await?;
 
@@ -117,13 +114,13 @@ async fn verify(
     format::json(())
 }
 
-/// In case the user forgot his password  this endpoints generate a forgot token
+/// In case the user forgot his password this endpoints generate a forgot token
 /// and send email to the user. In case the email not found in our DB, we are
 /// returning a valid request for for security reasons (not exposing users DB
 /// list).
 async fn forgot(
     State(ctx): State<AppContext>,
-    Json(params): Json<ForgotParams>,
+    Json(params): Json<AuthForgotParams>,
 ) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         // we don't want to expose our users email. if the email is invalid we still
@@ -142,7 +139,7 @@ async fn forgot(
 }
 
 /// Reset user password by the given parameters
-async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Json<()>> {
+async fn reset(State(ctx): State<AppContext>, Json(params): Json<AuthResetParams>) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller
@@ -157,8 +154,11 @@ async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -
     format::json(())
 }
 
-/// Creates a user login and returns a token
-async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -> Result<Response> {
+/// Creates a user login and returns authed user
+async fn sign_in(
+    State(ctx): State<AppContext>,
+    Json(params): Json<AuthSignInParams>,
+) -> Result<Response> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         return Ok((
             StatusCode::UNAUTHORIZED,
@@ -189,7 +189,7 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
 
     Ok((
         StatusCode::OK,
-        Json(json!(LoginResponse::new(&user, &token))),
+        Json(json!(AuthedUserResponse::new(&user, &token))),
     )
         .into_response())
 }
@@ -197,9 +197,9 @@ async fn login(State(ctx): State<AppContext>, Json(params): Json<LoginParams>) -
 pub fn routes() -> Routes {
     Routes::new()
         .prefix("auth")
-        .add("/register", post(register))
+        .add("/sign-up", post(sign_up))
         .add("/verify", post(verify))
-        .add("/login", post(login))
+        .add("/sign-in", post(sign_in))
         .add("/forgot", post(forgot))
         .add("/reset", post(reset))
 }

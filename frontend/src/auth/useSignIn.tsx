@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 async function signIn(email: string, password: string): Promise<AuthedUser> {
   // @ts-expect-error we expect a user type
-  return apiPost('auth/login', { email, password })
+  return apiPost('auth/sign-in', { email, password })
 }
 
 type IUseSignIn = UseMutateFunction<

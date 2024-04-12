@@ -3,14 +3,14 @@ use serde::{Deserialize, Serialize};
 use crate::models::_entities::users;
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct LoginResponse {
+pub struct AuthedUserResponse {
     pub token: String,
     pub pid: String,
     pub name: String,
     pub is_verified: bool,
 }
 
-impl LoginResponse {
+impl AuthedUserResponse {
     #[must_use]
     pub fn new(user: &users::Model, token: &String) -> Self {
         Self {

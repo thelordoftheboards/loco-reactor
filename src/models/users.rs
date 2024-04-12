@@ -13,13 +13,13 @@ use uuid::Uuid;
 pub use super::_entities::users::{self, ActiveModel, Entity, Model};
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct LoginParams {
+pub struct AuthSignInParams {
     pub email: String,
     pub password: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct RegisterParams {
+pub struct AuthSignUpParams {
     pub email: String,
     pub password: String,
     pub name: String,
@@ -168,7 +168,7 @@ impl super::_entities::users::Model {
     /// When could not save the user into the DB
     pub async fn create_with_password(
         db: &DatabaseConnection,
-        params: &RegisterParams,
+        params: &AuthSignUpParams,
     ) -> ModelResult<Self> {
         let txn = db.begin().await?;
 
