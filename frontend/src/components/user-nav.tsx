@@ -58,7 +58,7 @@ const UserNavInner = ({ authedUser }: { authedUser: any }) => {
 
         <DropdownMenuSeparator />
 
-        <Link to='/sign-in'>
+        <Link to='/auth/sign-in'>
           <DropdownMenuItem>
             Sign Out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>

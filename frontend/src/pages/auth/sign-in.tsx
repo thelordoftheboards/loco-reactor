@@ -59,7 +59,7 @@ export default function SignIn() {
             <p className='px-8 text-center text-sm text-muted-foreground'>
               Dont't have an account?{' '}
               <a
-                href='/sign-up'
+                href='/auth/sign-up'
                 className='underline underline-offset-4 hover:text-primary'
               >
                 Sign up

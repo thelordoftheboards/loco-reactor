@@ -59,7 +59,7 @@ export function VerifyForm({ className, ...props }: VerifyFormProps) {
         navigate('/')
       } else {
         // We are not signed in, let's do that next
-        navigate('/sign-in')
+        navigate('/auth/sign-in')
       }
 
       // Whether we have

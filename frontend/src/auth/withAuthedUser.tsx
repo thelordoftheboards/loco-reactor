@@ -8,7 +8,7 @@ export const withAuthedUser = (Component: FC<any>) => (props: any) => {
 
   // Verify that the user is authed, and if not send them to the sign-in page
   if (!(authedUser && authedUser.user && authedUser.user.pid)) {
-    return <Navigate to='/sign-in' replace={true} />
+    return <Navigate to='/auth/sign-in' replace={true} />
   }
 
   // Verify that the authed user email is verified, and if not send them to the verification page.

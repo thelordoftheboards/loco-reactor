@@ -31,7 +31,7 @@ export default function SignUp() {
                 Enter your email and password to create an account. <br />
                 Already have an account?{' '}
                 <Link
-                  to='/sign-in'
+                  to='/auth/sign-in'
                   className='underline underline-offset-4 hover:text-primary'
                 >
                   Sign In

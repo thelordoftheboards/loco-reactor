@@ -15,17 +15,17 @@ use crate::{
 };
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct AuthVerifyParams {
+pub struct VerifyParams {
     pub token: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct AuthForgotParams {
+pub struct ForgotParams {
     pub email: String,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
-pub struct AuthResetParams {
+pub struct ResetParams {
     pub token: String,
     pub password: String,
 }
@@ -101,7 +101,7 @@ async fn sign_up(
 /// the system.
 async fn verify(
     State(ctx): State<AppContext>,
-    Json(params): Json<AuthVerifyParams>,
+    Json(params): Json<VerifyParams>,
 ) -> Result<Response> {
     let user_result = users::Model::find_by_verification_token(&ctx.db, &params.token).await;
 
@@ -158,7 +158,7 @@ async fn verify(
 /// list).
 async fn forgot(
     State(ctx): State<AppContext>,
-    Json(params): Json<AuthForgotParams>,
+    Json(params): Json<ForgotParams>,
 ) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         // we don't want to expose our users email. if the email is invalid we still
@@ -177,10 +177,7 @@ async fn forgot(
 }
 
 /// Reset user password by the given parameters
-async fn reset(
-    State(ctx): State<AppContext>,
-    Json(params): Json<AuthResetParams>,
-) -> Result<Json<()>> {
+async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller

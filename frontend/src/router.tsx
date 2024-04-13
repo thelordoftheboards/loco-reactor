@@ -6,25 +6,25 @@ import { createBrowserRouter } from 'react-router-dom'
 const router = createBrowserRouter([
   // Auth routes
   {
-    path: '/sign-in',
+    path: '/auth/sign-in',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-in')).default,
     }),
   },
   {
-    path: '/sign-in-2',
+    path: '/auth/sign-in-2',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-in-2')).default,
     }),
   },
   {
-    path: '/sign-up',
+    path: '/auth/sign-up',
     lazy: async () => ({
       Component: (await import('./pages/auth/sign-up')).default,
     }),
   },
   {
-    path: '/forgot-password',
+    path: '/auth/forgot-password',
     lazy: async () => ({
       Component: (await import('./pages/auth/forgot-password')).default,
     }),
