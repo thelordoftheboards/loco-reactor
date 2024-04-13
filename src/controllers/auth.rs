@@ -100,18 +100,50 @@ async fn sign_up(
 async fn verify(
     State(ctx): State<AppContext>,
     Json(params): Json<AuthVerifyParams>,
-) -> Result<Json<()>> {
-    let user = users::Model::find_by_verification_token(&ctx.db, &params.token).await?;
+) -> Result<Response> {
+    let user_result = users::Model::find_by_verification_token(&ctx.db, &params.token).await;
 
-    if user.email_verified_at.is_some() {
-        tracing::info!(pid = user.pid.to_string(), "user already verified");
-    } else {
-        let active_model = user.into_active_model();
-        let user = active_model.verified(&ctx.db).await?;
-        tracing::info!(pid = user.pid.to_string(), "user verified");
-    }
+    match user_result {
+        Ok(user) => {
+            if user.email_verified_at.is_some() {
+                tracing::info!(pid = user.pid.to_string(), "user already verified");
+            } else {
+                let active_model = user.into_active_model();
+                let user = active_model.verified(&ctx.db).await?;
+                tracing::info!(pid = user.pid.to_string(), "user verified");
+            }
 
-    format::json(())
+            return Ok((StatusCode::OK, Json(json!(()))).into_response());
+        }
+        Err(err) => {
+            tracing::info!(
+                message = err.to_string(),
+                token = &params.token,
+                "auth::verify failed to verify with token",
+            );
+
+            match err {
+                ModelError::EntityNotFound => {
+                    return Ok((
+                        StatusCode::CONFLICT,
+                        Json(json!(ErrorResponse::new(&String::from(
+                            "err_auth_verify_token_not_found"
+                        )))),
+                    )
+                        .into_response());
+                }
+                _ => {
+                    return Ok((
+                        StatusCode::INTERNAL_SERVER_ERROR,
+                        Json(json!(ErrorResponse::new(&String::from(
+                            "err_auth_could_not_verify_user"
+                        )))),
+                    )
+                        .into_response());
+                }
+            };
+        }
+    };
 }
 
 /// In case the user forgot his password this endpoints generate a forgot token

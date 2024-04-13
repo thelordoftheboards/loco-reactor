@@ -14,16 +14,17 @@ export async function apiPost(
     body: JSON.stringify(body),
   })
 
-  let value = null
+  let value = null,
+    json_error = false
   try {
     value = await response.json()
   } catch (err) {
-    // Ignore any errors
+    json_error = true
   }
 
-  if (!value) {
-    throw new ResponseError('The response was empty', response)
-  } else if (value.error_id) {
+  if (json_error) {
+    throw new ResponseError('The response could not be read', response)
+  } else if (value && value.error_id) {
     throw new ResponseError(value.error_id, response)
   } else if (!response.ok) {
     throw new ResponseError('Request to server failed', response)
