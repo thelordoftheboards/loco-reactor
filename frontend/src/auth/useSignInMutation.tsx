@@ -1,5 +1,4 @@
 import { apiPost } from '../data/api'
-import { ResponseError } from '../utils/Errors/ResponseError'
 import * as userLocalStorage from './authed-user.localstore'
 import { AuthedUser } from './useAuthedUser'
 import { UseMutationResult, useMutation } from '@tanstack/react-query'
@@ -35,7 +34,6 @@ export function useSignInMutation(): ISignInMutation {
       // to userLocalStorage.getAuthedUser, which in turn will load the user data and
       // set the initials for the user
       // queryClient.setQueryData([QUERY_KEY.user], data)
-
       userLocalStorage.saveAuthedUser(data)
 
       navigate('/')

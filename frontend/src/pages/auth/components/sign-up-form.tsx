@@ -1,4 +1,4 @@
-import { useSignUp } from '../../../auth/useSignUp'
+import { useSignUpMutation } from '../../../auth/useSignUpMutation'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
@@ -42,7 +42,7 @@ const formSchema = z
 
 export function SignUpForm({ className, ...props }: SignUpFormProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const signUp = useSignUp()
+  const signInMutation = useSignUpMutation()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -53,15 +53,20 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    signUp(data)
+    try {
+      await signInMutation.mutateAsync(data)
+    } catch (err: unknown) {
+      const error = err as Error
+      form.setError('confirmPassword', {
+        type: 'manual',
+        message: error.message,
+      })
+    }
 
-    // TODO The timeout ignores errors completely, does not wait for a response from the server in order to re-enable the button. Errors are displayed with toasts. A better implementation would have the button disabled for the exact duration of the server call and display errors within the form itself.
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    setIsLoading(false)
   }
 
   return (
@@ -113,40 +118,6 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
             <Button className='mt-2' loading={isLoading}>
               Create Account
             </Button>
-
-            {/*
-            <div className='relative my-2'>
-              <div className='absolute inset-0 flex items-center'>
-                <span className='w-full border-t' />
-              </div>
-              <div className='relative flex justify-center text-xs uppercase'>
-                <span className='bg-background px-2 text-muted-foreground'>
-                  Or continue with
-                </span>
-              </div>
-            </div>
-
-            <div className='flex items-center gap-2'>
-              <Button
-                variant='outline'
-                className='w-full'
-                type='button'
-                loading={isLoading}
-                leftSection={<IconBrandGithub className='h-4 w-4' />}
-              >
-                GitHub
-              </Button>
-              <Button
-                variant='outline'
-                className='w-full'
-                type='button'
-                loading={isLoading}
-                leftSection={<IconBrandFacebook className='h-4 w-4' />}
-              >
-                Facebook
-              </Button>
-            </div>
-            */}
           </div>
         </form>
       </Form>

@@ -1,4 +1,4 @@
-import { useSignInMutation } from '../../../auth/useSignIn'
+import { useSignInMutation } from '../../../auth/useSignInMutation'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
@@ -52,7 +52,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
 
     try {
       await signInMutation.mutateAsync(data)
-    } catch (err:unknown) {
+    } catch (err: unknown) {
       const error = err as Error
       form.setError('password', { type: 'manual', message: error.message })
     }
