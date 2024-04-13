@@ -1,8 +1,7 @@
-import { useSignIn } from '../../../auth/useSignIn'
+import { useSignInMutation } from '../../../auth/useSignIn'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
-//import { IconBrandFacebook, IconBrandGithub } from '@tabler/icons-react'
 import {
   Form,
   FormControl,
@@ -38,7 +37,7 @@ const formSchema = z.object({
 
 export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
-  const signIn = useSignIn()
+  const signInMutation = useSignInMutation()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -48,15 +47,17 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
 
-    signIn(data)
+    try {
+      await signInMutation.mutateAsync(data)
+    } catch (err:unknown) {
+      const error = err as Error
+      form.setError('password', { type: 'manual', message: error.message })
+    }
 
-    // TODO The timeout ignores errors completely, does not wait for a response from the server in order to re-enable the button. Errors are displayed with toasts. A better implementation would have the button disabled for the exact duration of the server call and display errors within the form itself.
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    setIsLoading(false)
   }
 
   return (

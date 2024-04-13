@@ -2,8 +2,7 @@ import { apiPost } from '../data/api'
 import { ResponseError } from '../utils/Errors/ResponseError'
 import * as userLocalStorage from './authed-user.localstore'
 import { AuthedUser } from './useAuthedUser'
-import { useToast } from '@/components/ui/use-toast'
-import { UseMutateFunction, useMutation } from '@tanstack/react-query'
+import { UseMutationResult, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 async function signIn(email: string, password: string): Promise<AuthedUser> {
@@ -11,7 +10,7 @@ async function signIn(email: string, password: string): Promise<AuthedUser> {
   return apiPost('auth/sign-in', { email, password })
 }
 
-type IUseSignIn = UseMutateFunction<
+type ISignInMutation = UseMutationResult<
   AuthedUser,
   unknown,
   {
@@ -21,11 +20,10 @@ type IUseSignIn = UseMutateFunction<
   unknown
 >
 
-export function useSignIn(): IUseSignIn {
+export function useSignInMutation(): ISignInMutation {
   const navigate = useNavigate()
-  const { toast } = useToast()
 
-  const { mutate: signInMutation } = useMutation<
+  const signInMutation = useMutation<
     AuthedUser,
     unknown,
     { email: string; password: string },
@@ -42,12 +40,8 @@ export function useSignIn(): IUseSignIn {
 
       navigate('/')
     },
-    onError: (error) => {
+    onError: (_err) => {
       userLocalStorage.removeAuthedUser()
-      toast({
-        title: 'Oops, an error occured',
-        description: error instanceof ResponseError ? error.message : '',
-      })
     },
   })
 
