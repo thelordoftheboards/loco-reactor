@@ -1,4 +1,4 @@
-import { UserAuthForm } from './components/user-auth-form'
+import { SignInForm } from './components/sign-in-form'
 import LogoSvg from '@/assets/logo.svg'
 
 export default function SignIn() {
@@ -38,7 +38,7 @@ export default function SignIn() {
                 to log into your account
               </p>
             </div>
-            <UserAuthForm />
+            <SignInForm />
             <p className='px-8 text-center text-sm text-muted-foreground'>
               By clicking login, you agree to our{' '}
               <a

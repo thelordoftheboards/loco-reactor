@@ -1,4 +1,4 @@
-import { UserAuthForm } from './components/user-auth-form'
+import { SignInForm } from './components/sign-in-form'
 import { Card } from '@/components/ui/card'
 
 export default function SignIn2() {
@@ -29,7 +29,7 @@ export default function SignIn2() {
                 to log into your account
               </p>
             </div>
-            <UserAuthForm />
+            <SignInForm />
             <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
               By clicking login, you agree to our{' '}
               <a

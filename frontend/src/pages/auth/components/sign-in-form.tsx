@@ -36,7 +36,7 @@ const formSchema = z.object({
     }),
 })
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export function SignInForm({ className, ...props }: UserAuthFormProps) {
   const [isLoading, setIsLoading] = useState(false)
   const signIn = useSignIn()
 
