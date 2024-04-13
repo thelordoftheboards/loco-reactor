@@ -25,10 +25,12 @@ export async function apiPost(
   if (json_error) {
     throw new ResponseError('The response could not be read', null)
   } else if (value && (value.error_id || value.error_message)) {
-    
     throw new ResponseError(value.error_message ?? value.error_id, value)
   } else if (!response.ok) {
-    throw new ResponseError('Request to server failed with status '+ response.status, null)
+    throw new ResponseError(
+      'Request to server failed with status ' + response.status,
+      null
+    )
   } else if (response.status !== 200) {
     throw new ResponseError(
       'Request to server returned unacceptable status ' + response.status,

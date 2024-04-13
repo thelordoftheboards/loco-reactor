@@ -63,8 +63,9 @@ export function VerifyForm({ className, ...props }: VerifyFormProps) {
       }
 
       // Whether we have
-    } catch (err) {
-      form.setError('token', { type: 'manual', message: err.message })
+    } catch (err: unknown) {
+      const error = err as Error
+      form.setError('token', { type: 'manual', message: error.message })
     }
 
     setIsLoading(false)
