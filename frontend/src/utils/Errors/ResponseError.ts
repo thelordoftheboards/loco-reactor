@@ -1,9 +1,12 @@
 export class ResponseError extends Error {
   constructor(
     message: string,
-    public response: Response
+    public response_value: any
   ) {
     super(message)
-    console.error('ResponseError created: ', message, response)
+
+    this.response_value = response_value
+
+    console.error('ResponseError created: ', message, response_value)
   }
 }

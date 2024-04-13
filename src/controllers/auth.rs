@@ -56,18 +56,20 @@ async fn sign_up(
                 ModelError::EntityAlreadyExists => {
                     return Ok((
                         StatusCode::CONFLICT,
-                        Json(json!(ErrorResponse::new(&String::from(
-                            "err_auth_user_with_this_email_already_exists"
-                        )))),
+                        Json(json!(ErrorResponse::new(
+                            &String::from("err_auth_user_with_this_email_already_exists"),
+                            &String::from("User with this email is already registered.")
+                        ))),
                     )
                         .into_response());
                 }
                 _ => {
                     return Ok((
                         StatusCode::INTERNAL_SERVER_ERROR,
-                        Json(json!(ErrorResponse::new(&String::from(
-                            "err_auth_could_not_create_user"
-                        )))),
+                        Json(json!(ErrorResponse::new(
+                            &String::from("err_auth_could_not_create_user"),
+                            &String::from("Could not create user. Please try again.")
+                        ))),
                     )
                         .into_response());
                 }
@@ -126,18 +128,22 @@ async fn verify(
                 ModelError::EntityNotFound => {
                     return Ok((
                         StatusCode::CONFLICT,
-                        Json(json!(ErrorResponse::new(&String::from(
-                            "err_auth_verify_token_not_found"
-                        )))),
+                        Json(json!(ErrorResponse::new(
+                            &String::from("err_auth_verify_token_not_found"),
+                            &String::from(
+                                "Verification code could not be found. Re-enter or re-send."
+                            )
+                        ))),
                     )
                         .into_response());
                 }
                 _ => {
                     return Ok((
                         StatusCode::INTERNAL_SERVER_ERROR,
-                        Json(json!(ErrorResponse::new(&String::from(
-                            "err_auth_could_not_verify_user"
-                        )))),
+                        Json(json!(ErrorResponse::new(
+                            &String::from("err_auth_could_not_verify_user"),
+                            &String::from("Email could not be verified. Please try again.")
+                        ))),
                     )
                         .into_response());
                 }
@@ -197,9 +203,10 @@ async fn sign_in(
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         return Ok((
             StatusCode::UNAUTHORIZED,
-            Json(json!(ErrorResponse::new(&String::from(
-                "err_auth_user_not_found"
-            )))),
+            Json(json!(ErrorResponse::new(
+                &String::from("err_auth_user_not_found"),
+                &String::from("Could not sign in with this email and password.")
+            ))),
         )
             .into_response());
     };
@@ -209,9 +216,10 @@ async fn sign_in(
     if !valid {
         return Ok((
             StatusCode::UNAUTHORIZED,
-            Json(json!(ErrorResponse::new(&String::from(
-                "err_auth_incorrect_password"
-            )))),
+            Json(json!(ErrorResponse::new(
+                &String::from("err_auth_incorrect_password"),
+                &String::from("Could not sign in with this email and password.")
+            ))),
         )
             .into_response());
     }
