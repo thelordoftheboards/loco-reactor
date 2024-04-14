@@ -1,3 +1,4 @@
+import { apiPost } from '../../../utils/api'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import {
@@ -13,6 +14,7 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { HTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { z } from 'zod'
 
 interface ForgotFormProps extends HTMLAttributes<HTMLDivElement> {}
@@ -25,6 +27,7 @@ const formSchema = z.object({
 })
 
 export function ForgotForm({ className, ...props }: ForgotFormProps) {
+  const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -32,13 +35,21 @@ export function ForgotForm({ className, ...props }: ForgotFormProps) {
     defaultValues: { email: '' },
   })
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true)
-    console.log(data)
 
-    setTimeout(() => {
-      setIsLoading(false)
-    }, 3000)
+    try {
+      // If the API request succeeds, then the user is verfied on the server
+      await apiPost('auth/forgot', data)
+
+      // As log as the reset is successful, take the user to the sign in
+      navigate('/auth/sign-in')
+    } catch (err: unknown) {
+      const error = err as Error
+      form.setError('email', { type: 'manual', message: error.message })
+    }
+
+    setIsLoading(false)
   }
 
   return (

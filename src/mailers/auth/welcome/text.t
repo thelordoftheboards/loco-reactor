@@ -6,9 +6,13 @@ Hello {{name}},
     http://{{domain}}/auth/verify?code={{verifyToken}}
 
   Alternatively, you can visit
+
     http://{{domain}}/auth/verify
+
   and enter the code
+
     {{verifyToken}}
+
   when prompted.
 
 Best regards,

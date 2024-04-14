@@ -1,5 +1,5 @@
+import { apiPost } from '../../../utils/api'
 import ClearAuthedUser from './clear-authed-user'
-import { useSignUpMutation } from './use-sign-up-mutation'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
 import {
@@ -15,16 +15,15 @@ import { cn } from '@/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { HTMLAttributes, useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { z } from 'zod'
 
-interface SignUpFormProps extends HTMLAttributes<HTMLDivElement> {}
+interface ResetFormProps extends HTMLAttributes<HTMLDivElement> {}
 
 const formSchema = z
   .object({
-    email: z
-      .string()
-      .min(1, { message: 'Please enter your email' })
-      .email({ message: 'Invalid email address' }),
+    token: z.string().uuid(),
     password: z
       .string()
       .min(1, {
@@ -40,14 +39,15 @@ const formSchema = z
     path: ['confirmPassword'],
   })
 
-export function SignUpForm({ className, ...props }: SignUpFormProps) {
+export function ResetForm({ className, ...props }: ResetFormProps) {
+  const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const [isLoading, setIsLoading] = useState(false)
-  const signInMutation = useSignUpMutation()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: '',
+      token: searchParams.get('code') ?? '',
       password: '',
       confirmPassword: '',
     },
@@ -57,13 +57,14 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
     setIsLoading(true)
 
     try {
-      await signInMutation.mutateAsync(data)
+      // If the API request succeeds, then the user is verfied on the server
+      await apiPost('auth/reset', data)
+
+      // As log as the reset is successful, take the user to the sign in
+      navigate('/auth/sign-in')
     } catch (err: unknown) {
       const error = err as Error
-      form.setError('confirmPassword', {
-        type: 'manual',
-        message: error.message,
-      })
+      form.setError('token', { type: 'manual', message: error.message })
     }
 
     setIsLoading(false)
@@ -78,7 +79,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           <div className='grid gap-2'>
             <FormField
               control={form.control}
-              name='email'
+              name='token'
               render={({ field }) => (
                 <FormItem className='space-y-1'>
                   <FormLabel>Email</FormLabel>
@@ -116,7 +117,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
               )}
             />
             <Button className='mt-2' loading={isLoading}>
-              Create Account
+              Reset Password
             </Button>
           </div>
         </form>

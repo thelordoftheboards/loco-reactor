@@ -66,7 +66,7 @@ export const sidelinks: SideLink[] = [
       {
         title: 'Forgot Password',
         label: '',
-        href: '/auth/forgot-password',
+        href: '/auth/forgot',
         icon: <IconHexagonNumber4 size={18} />,
       },
     ],

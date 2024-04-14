@@ -24,9 +24,15 @@ const router = createBrowserRouter([
     }),
   },
   {
-    path: '/auth/forgot-password',
+    path: '/auth/forgot',
     lazy: async () => ({
-      Component: (await import('./pages/auth/forgot-password')).default,
+      Component: (await import('./pages/auth/forgot')).default,
+    }),
+  },
+  {
+    path: '/auth/reset',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/reset')).default,
     }),
   },
   {

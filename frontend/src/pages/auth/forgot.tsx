@@ -2,7 +2,7 @@ import { ForgotForm } from './components/forgot-form'
 import { Card } from '@/components/ui/card'
 import { Link } from 'react-router-dom'
 
-export default function ForgotPassword() {
+export default function Forgot() {
   return (
     <>
       <div className='container grid h-svh flex-col items-center justify-center bg-primary-foreground lg:max-w-none lg:px-0'>

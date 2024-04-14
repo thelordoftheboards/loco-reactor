@@ -15,7 +15,7 @@
   <p>
     Alternatively, you can visit
     <br>
-    <u>http://{{domain}}/auth/verify</u>
+    <strong>http://{{domain}}/auth/verify</strong>
     <br>
     and enter the code
     <br>

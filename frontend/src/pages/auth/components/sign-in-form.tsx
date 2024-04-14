@@ -1,5 +1,5 @@
-import { useSignInMutation } from './use-sign-In-mutation'
 import ClearAuthedUser from './clear-authed-user'
+import { useSignInMutation } from './use-sign-In-mutation'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'
 import {
@@ -88,7 +88,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
                   <div className='flex items-center justify-between'>
                     <FormLabel>Password</FormLabel>
                     <Link
-                      to='/auth/forgot-password'
+                      to='/auth/forgot'
                       className='text-sm font-medium text-muted-foreground hover:opacity-75'
                     >
                       Forgot password?
