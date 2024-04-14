@@ -1,4 +1,4 @@
-import { ResponseError } from '../utils/Errors/ResponseError'
+import { ResponseError } from './api-response-error'
 
 const apiUrlBase = '/api/'
 

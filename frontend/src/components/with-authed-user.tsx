@@ -1,4 +1,4 @@
-import { useAuthedUser } from './useAuthedUser'
+import { useAuthedUser } from '../hooks/use-authed-user'
 import { FC } from 'react'
 import { Navigate } from 'react-router-dom'
 

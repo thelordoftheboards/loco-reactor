@@ -1,4 +1,4 @@
-import { useSignUpMutation } from '../../../auth/useSignUpMutation'
+import { useSignUpMutation } from './use-sign-up-mutation'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import { PasswordInput } from '@/components/custom/password-input'

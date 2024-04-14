@@ -53,6 +53,10 @@ async fn sign_up(
             );
 
             match err {
+                // TODO Consider that returning err_auth_user_with_this_email_already_exists could allow to check if
+                // a certain email already exists in the system. That said, returning any error is pretty much an
+                // indication that the email already exists, and if they try it a few times and get an 'unknown'
+                // error, it is a dead giveaway that the email is in use.
                 ModelError::EntityAlreadyExists => {
                     return Ok((
                         StatusCode::CONFLICT,

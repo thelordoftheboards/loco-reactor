@@ -1,4 +1,4 @@
-import { withAuthedUser } from '../auth/withAuthedUser'
+import { withAuthedUser } from './with-authed-user'
 import { Button } from '@/components/custom/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {

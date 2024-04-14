@@ -1,4 +1,4 @@
-import { QUERY_KEY } from '../constants/queryKeys'
+import { QUERY_KEY } from '../../../constants/queryKeys'
 import { useQueryClient } from '@tanstack/react-query'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router-dom'

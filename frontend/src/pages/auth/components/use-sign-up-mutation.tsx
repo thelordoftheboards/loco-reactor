@@ -1,15 +1,19 @@
-import { apiPost } from '../data/api'
-import * as userLocalStorage from './authed-user.localstore'
-import { AuthedUser } from './useAuthedUser'
+import { apiPost } from '../../../utils/api'
+import * as userLocalStorage from '../../../hooks/authed-user.localstore'
+import { AuthedUser } from '../../../hooks/use-authed-user'
 import { UseMutationResult, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
-async function signIn(email: string, password: string): Promise<AuthedUser> {
+async function signUp(email: string, password: string): Promise<AuthedUser> {
   // @ts-expect-error we expect a user type
-  return apiPost('auth/sign-in', { email, password })
+  return apiPost('auth/sign-up', {
+    name: email.split('@')[0],
+    email,
+    password,
+  })
 }
 
-type ISignInMutation = UseMutationResult<
+type IUseSignUpMutation = UseMutationResult<
   AuthedUser,
   unknown,
   {
@@ -19,15 +23,15 @@ type ISignInMutation = UseMutationResult<
   unknown
 >
 
-export function useSignInMutation(): ISignInMutation {
+export function useSignUpMutation(): IUseSignUpMutation {
   const navigate = useNavigate()
 
-  const signInMutation = useMutation<
+  const signUpMutation = useMutation<
     AuthedUser,
     unknown,
     { email: string; password: string },
     unknown
-  >(({ email, password }) => signIn(email, password), {
+  >(({ email, password }) => signUp(email, password), {
     onSuccess: (data) => {
       // We will not store the results into react query. When the user navigates to a page
       // that has 'withAuthedUser', the query results will be empty and this will force call
@@ -43,5 +47,5 @@ export function useSignInMutation(): ISignInMutation {
     },
   })
 
-  return signInMutation
+  return signUpMutation
 }

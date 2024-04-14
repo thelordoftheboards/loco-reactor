@@ -1,4 +1,4 @@
-import { AuthedUser } from './useAuthedUser'
+import { AuthedUser } from './use-authed-user'
 
 const LOCAL_STORAGE_KEY_AUTHED_USER = 'authed-user'
 
