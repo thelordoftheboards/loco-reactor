@@ -82,9 +82,12 @@ export function ResetForm({ className, ...props }: ResetFormProps) {
               name='token'
               render={({ field }) => (
                 <FormItem className='space-y-1'>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>Reset Code</FormLabel>
                   <FormControl>
-                    <Input placeholder='name@example.com' {...field} />
+                    <Input
+                      placeholder='xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx'
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
