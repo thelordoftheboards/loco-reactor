@@ -10,6 +10,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                "dbaeumer.vscode-eslint",
                 "gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode",
                 "plylrnsdy.run-as",
