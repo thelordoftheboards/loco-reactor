@@ -1,10 +1,20 @@
+import {
+  applicationDescription,
+  applicationTitle, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+} from './src/data/branding-strings'
 import react from '@vitejs/plugin-react-swc'
 import path from 'path'
 import { defineConfig } from 'vite'
+import handlebars from 'vite-plugin-handlebars'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    handlebars({ context: { applicationDescription, applicationTitle } }),
+  ],
+
   server: {
     port: 3001,
     strictPort: true,
