@@ -14,6 +14,7 @@
                 "gruntfuggly.todo-tree",
                 "esbenp.prettier-vscode",
                 "plylrnsdy.run-as",
+                "rangav.vscode-thunder-client",
                 "rust-lang.rust-analyzer",
                 "serayuzgur.crates",
                 "tamasfe.even-better-toml",
