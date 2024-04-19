@@ -180,6 +180,30 @@ async fn forgot(
     format::json(())
 }
 
+/// In case the user did not receive their welcome email re-send the welcome
+/// email to the user. In case the email not found in our DB, we are
+/// returning a valid request for for security reasons (not exposing users DB
+/// list).
+async fn resend(
+    State(ctx): State<AppContext>,
+    Json(params): Json<ForgotParams>,
+) -> Result<Json<()>> {
+    let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
+        // we don't want to expose our users email. if the email is invalid we still
+        // returning success to the caller
+        return format::json(());
+    };
+
+    let user = user
+        .into_active_model()
+        .set_forgot_password_sent(&ctx.db)
+        .await?;
+
+    AuthMailer::send_welcome(&ctx, &user).await?;
+
+    format::json(())
+}
+
 /// Reset user password by the given parameters
 async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Json<()>> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
@@ -245,5 +269,6 @@ pub fn routes() -> Routes {
         .add("/verify", post(verify))
         .add("/sign-in", post(sign_in))
         .add("/forgot", post(forgot))
+        .add("/resend", post(resend))
         .add("/reset", post(reset))
 }

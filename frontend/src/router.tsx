@@ -30,6 +30,12 @@ const router = createBrowserRouter([
     }),
   },
   {
+    path: '/auth/resend',
+    lazy: async () => ({
+      Component: (await import('./pages/auth/resend')).default,
+    }),
+  },
+  {
     path: '/auth/reset',
     lazy: async () => ({
       Component: (await import('./pages/auth/reset')).default,

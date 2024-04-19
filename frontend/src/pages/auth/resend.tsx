@@ -1,11 +1,11 @@
-import { VerifyForm } from './components/verify-form'
+import { ResendForm } from './components/resend-form'
 import LogoDiscreteSvg from '@/assets/logo-discrete.svg'
 import ThemeSwitch from '@/components/theme-switch'
 import { Card } from '@/components/ui/card'
 import { BRANDING_APPLICATION_TITLE } from '@/data/branding-strings'
 import { Link } from 'react-router-dom'
 
-export default function Verify() {
+export default function Resend() {
   return (
     <>
       <div className='absolute right-3 top-3 ml-auto flex items-center space-x-4'>
@@ -23,28 +23,14 @@ export default function Verify() {
           <Card className='p-6'>
             <div className='mb-2 flex flex-col space-y-2 text-left'>
               <h1 className='text-md font-semibold tracking-tight'>
-                Verify Email
+                Resend Welcome Email
               </h1>
               <p className='text-sm text-muted-foreground'>
-                Enter the code from the welcome email or <br />
-                click the link in the email, then click{' '}
-                <strong>Continue</strong>.
+                Enter your registered email and <br /> we will re-send you the
+                welcome email.
               </p>
             </div>
-            <VerifyForm />
-            <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
-              Did not receive the welcome email?
-              <br />
-              Check the spam in your email app or{' '}
-              <Link
-                to='/auth/resend'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Resend
-              </Link>
-              .
-            </p>
-
+            <ResendForm />
             <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
               Don&apos;t have an account?{' '}
               <Link
