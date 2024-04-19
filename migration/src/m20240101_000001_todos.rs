@@ -38,9 +38,7 @@ enum Todos {
     Id,
     Text,
     UserId,
-    
 }
-
 
 #[derive(DeriveIden)]
 enum Users {
