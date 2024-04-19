@@ -1,6 +1,7 @@
 import { LegalDocuments } from './components/legal-documents'
 import { SignInForm } from './components/sign-in-form'
 import LogoSvg from '@/assets/logo.svg'
+import ThemeSwitch from '@/components/theme-switch'
 import * as branding from '@/data/branding-strings'
 
 export default function SignIn() {
@@ -33,30 +34,38 @@ export default function SignIn() {
             </div>
           )}
         </div>
-        <div className='lg:p-8'>
-          <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]'>
-            <div className='flex flex-col space-y-2 text-left'>
-              <h1 className='text-2xl font-semibold tracking-tight'>Sign In</h1>
-              <p className='text-sm text-muted-foreground'>
-                Enter your email and password below <br />
-                to sign into your account
+        <div>
+          <div className='absolute right-3 top-3 ml-auto flex items-center space-x-4'>
+            <ThemeSwitch />
+          </div>
+
+          <div className='lg:p-8'>
+            <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]'>
+              <div className='flex flex-col space-y-2 text-left'>
+                <h1 className='text-2xl font-semibold tracking-tight'>
+                  Sign In
+                </h1>
+                <p className='text-sm text-muted-foreground'>
+                  Enter your email and password below <br />
+                  to sign into your account
+                </p>
+              </div>
+              <SignInForm />
+              <p className='px-8 text-center text-sm text-muted-foreground'>
+                By clicking <strong>Sign In</strong>, you agree to our
+                <LegalDocuments />.
+              </p>
+              <p className='px-8 text-center text-sm text-muted-foreground'>
+                Dont't have an account?{' '}
+                <a
+                  href='/auth/sign-up'
+                  className='underline underline-offset-4 hover:text-primary'
+                >
+                  Sign up
+                </a>
+                .
               </p>
             </div>
-            <SignInForm />
-            <p className='px-8 text-center text-sm text-muted-foreground'>
-              By clicking <strong>Sign In</strong>, you agree to our
-              <LegalDocuments />.
-            </p>
-            <p className='px-8 text-center text-sm text-muted-foreground'>
-              Dont't have an account?{' '}
-              <a
-                href='/auth/sign-up'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Sign up
-              </a>
-              .
-            </p>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 import { VerifyForm } from './components/verify-form'
 import LogoDiscreteSvg from '@/assets/logo-discrete.svg'
+import ThemeSwitch from '@/components/theme-switch'
 import { Card } from '@/components/ui/card'
 import { BRANDING_APPLICATION_TITLE } from '@/data/branding-strings'
 import { Link } from 'react-router-dom'
@@ -7,6 +8,10 @@ import { Link } from 'react-router-dom'
 export default function Verify() {
   return (
     <>
+      <div className='absolute right-3 top-3 ml-auto flex items-center space-x-4'>
+        <ThemeSwitch />
+      </div>
+
       <div className='container grid h-svh flex-col items-center justify-center bg-primary-foreground lg:max-w-none lg:px-0'>
         <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[480px] lg:p-8'>
           <div className='mb-4 flex items-center justify-center'>
