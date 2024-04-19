@@ -4,18 +4,16 @@
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::models::_entities::todo::{ActiveModel, Entity, Model};
+use crate::models::_entities::todos::{ActiveModel, Entity, Model};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Params {
-    pub title: Option<String>,
-    pub content: Option<String>,
+    pub text: String,
 }
 
 impl Params {
     fn update(&self, item: &mut ActiveModel) {
-        item.title = Set(self.title.clone());
-        item.content = Set(self.content.clone());
+        item.text = Set(self.text.clone());
     }
 }
 
@@ -60,7 +58,7 @@ pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Resu
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("todo")
+        .prefix("todos")
         .add("/", get(list))
         .add("/", post(add))
         .add("/:id", get(get_one))
