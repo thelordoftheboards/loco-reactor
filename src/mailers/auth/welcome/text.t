@@ -1,6 +1,6 @@
 Hello {{name}},
 
-  Welcome to Loco Reactor! Your account has been created.
+  Welcome to {{BRANDING_APPLICATION_TITLE}}! Your account has been created.
   Before you get started, please verify your account by clicking the link below:
 
     http://{{domain}}/auth/verify?code={{verifyToken}}
@@ -16,4 +16,4 @@ Hello {{name}},
   when prompted.
 
 Best regards,
-The Loco Reactor Team
+The {{BRANDING_APPLICATION_TITLE}} Team

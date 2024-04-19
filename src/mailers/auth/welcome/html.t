@@ -6,7 +6,7 @@
     <title>
     
         <!-- loco reactor -->
-        Welcome to Loco Reactor
+        Welcome to {{BRANDING_APPLICATION_TITLE}}
         <!-- loco reactor -->
         
     </title>
@@ -104,7 +104,7 @@
             <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
 
                 <!-- loco reactor -->
-                Welcome to Loco Reactor!
+                Welcome to {{BRANDING_APPLICATION_TITLE}}!
                 <!-- loco reactor -->
 
             </span>
@@ -124,7 +124,7 @@
 
                   <!-- loco reactor -->
                   <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
-                    Welcome to Loco Reactor! Your account has been created.
+                    Welcome to {{BRANDING_APPLICATION_TITLE}}! Your account has been created.
                     Before you get started, please verify your account by clicking the button below:
                   </p>
                   <!-- loco reactor -->
@@ -155,19 +155,19 @@
                   <!-- loco reactor -->
                   <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
                     Alternatively, you can visit
-                    <br>
+                    <br><br>
                     <strong>http://{{domain}}/auth/verify</strong>
-                    <br>
+                    <br><br>
                     and enter the code
-                    <br>
+                    <br><br>
                     <strong>{{verifyToken}}</strong>
-                    <br>
+                    <br><br>
                     when prompted.
                   </p>
                   <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
                     Best regards,
                     <br>
-                    The Loco Reactor Team
+                    The {{BRANDING_APPLICATION_TITLE}} Team
                   </p>
                   <!-- loco reactor -->
 
@@ -185,7 +185,7 @@
                     <span class="apple-link" style="color: #9a9ea6; font-size: 16px; text-align: center;">
                     
                     <!-- loco reactor -->
-                    1 Loco Reactor Ct., Never Ever Land
+                    {{BRANDING_COMPANY_ADDRESS}}
                     <!-- loco reactor -->
                     
                     </span>

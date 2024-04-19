@@ -6,7 +6,7 @@
     <title>
     
         <!-- loco reactor -->
-        Reset Loco Reactor password
+        Reset {{BRANDING_APPLICATION_TITLE}} password
         <!-- loco reactor -->
         
     </title>
@@ -104,7 +104,7 @@
             <span class="preheader" style="color: transparent; display: none; height: 0; max-height: 0; max-width: 0; opacity: 0; overflow: hidden; mso-hide: all; visibility: hidden; width: 0;">
 
                 <!-- loco reactor -->
-                Forgot your password? No worries! You can reset it by clicking ...
+                Forgot your {{BRANDING_APPLICATION_TITLE}} password? No worries! You can reset it by clicking ...
                 <!-- loco reactor -->
 
             </span>
@@ -124,7 +124,7 @@
 
                   <!-- loco reactor -->
                   <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
-                    Forgot your password? No worries! You can reset it by clicking the button below:
+                    Forgot your {{BRANDING_APPLICATION_TITLE}} password? No worries! You can reset it by clicking the button below:
                   </p>
                   <!-- loco reactor -->
                   
@@ -154,15 +154,19 @@
                   <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
                     <!-- loco reactor -->
                     Alternatively, you can visit
-                    <br>
-                    <strong>http://{{domain}}/auth/reset</strong>
-                    <br>
+                    <br><br>
+                    &nbsp;<strong>http://{{domain}}/auth/reset</strong>
+                    <br><br>
                     and enter the code
-                    <br>
-                    <strong>{{resetToken}}</strong>
-                    <br>
+                    <br><br>
+                    &nbsp;<strong>{{resetToken}}</strong>
+                    <br><br>
                     when prompted.
-                    <!-- loco reactor -->
+                  </p>
+                  <p style="font-family: Helvetica, sans-serif; font-size: 16px; font-weight: normal; margin: 0; margin-bottom: 16px;">
+                    Best regards,
+                    <br>
+                    The {{BRANDING_APPLICATION_TITLE}} Team
                   </p>
 
                 </td>
@@ -179,7 +183,7 @@
                     <span class="apple-link" style="color: #9a9ea6; font-size: 16px; text-align: center;">
                     
                     <!-- loco reactor -->
-                    1 Loco Reactor Ct., Never Ever Land
+                    {{BRANDING_COMPANY_ADDRESS}}
                     <!-- loco reactor -->
                     
                     </span>

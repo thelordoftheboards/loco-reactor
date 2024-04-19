@@ -1,7 +1,7 @@
 import { VerifyForm } from './components/verify-form'
 import LogoDiscreteSvg from '@/assets/logo-discrete.svg'
 import { Card } from '@/components/ui/card'
-import { applicationTitle } from '@/data/branding-strings'
+import { BRANDING_APPLICATION_TITLE } from '@/data/branding-strings'
 import { Link } from 'react-router-dom'
 
 export default function Verify() {
@@ -11,7 +11,9 @@ export default function Verify() {
         <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[480px] lg:p-8'>
           <div className='mb-4 flex items-center justify-center'>
             <img src={LogoDiscreteSvg} alt='Logo' className='mr-2' />
-            <h1 className='text-xl font-medium'>{applicationTitle}</h1>
+            <h1 className='text-xl font-medium'>
+              {BRANDING_APPLICATION_TITLE}
+            </h1>
           </div>
           <Card className='p-6'>
             <div className='mb-2 flex flex-col space-y-2 text-left'>

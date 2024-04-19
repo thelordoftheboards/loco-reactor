@@ -1,6 +1,7 @@
+import { LegalDocuments } from './components/legal-documents'
 import { SignInForm } from './components/sign-in-form'
 import LogoSvg from '@/assets/logo.svg'
-import { applicationTitle } from '@/data/branding-strings'
+import * as branding from '@/data/branding-strings'
 
 export default function SignIn() {
   return (
@@ -9,7 +10,7 @@ export default function SignIn() {
         <div className='relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex'>
           <div className='absolute inset-0 bg-zinc-900' />
           <div className='relative z-20 flex items-center text-lg font-medium'>
-            {applicationTitle}
+            {branding.BRANDING_APPLICATION_TITLE}
           </div>
 
           <img
@@ -19,16 +20,18 @@ export default function SignIn() {
             alt='Logo'
           />
 
-          <div className='relative z-20 mt-auto'>
-            <blockquote className='space-y-2'>
-              <p className='text-lg'>
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
-              </p>
-              <footer className='text-sm'>Sofia Davis</footer>
-            </blockquote>
-          </div>
+          {branding.BRANDING_SIGN_IN_QUOTE_CONTENT.length > 0 && (
+            <div className='relative z-20 mt-auto'>
+              <blockquote className='space-y-2'>
+                <p className='text-lg'>
+                  &ldquo; {branding.BRANDING_SIGN_IN_QUOTE_CONTENT} &ldquo;
+                </p>
+                <footer className='text-sm'>
+                  {branding.BRANDING_SIGN_IN_QUOTE_AUTHOR}
+                </footer>
+              </blockquote>
+            </div>
+          )}
         </div>
         <div className='lg:p-8'>
           <div className='mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]'>
@@ -41,21 +44,8 @@ export default function SignIn() {
             </div>
             <SignInForm />
             <p className='px-8 text-center text-sm text-muted-foreground'>
-              By clicking login, you agree to our{' '}
-              <a
-                href='/terms'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Terms of Service
-              </a>{' '}
-              and{' '}
-              <a
-                href='/privacy'
-                className='underline underline-offset-4 hover:text-primary'
-              >
-                Privacy Policy
-              </a>
-              .
+              By clicking login, you agree to our
+              <LegalDocuments />.
             </p>
             <p className='px-8 text-center text-sm text-muted-foreground'>
               Dont't have an account?{' '}

@@ -4,6 +4,7 @@
 use loco_rs::prelude::*;
 use serde_json::json;
 
+use crate::initializers::branding_strings::*;
 use crate::models::users;
 
 static welcome: Dir<'_> = include_dir!("src/mailers/auth/welcome");
@@ -29,7 +30,9 @@ impl AuthMailer {
                 locals: json!({
                   "name": user.name,
                   "verifyToken": user.email_verification_token,
-                  "domain": ctx.config.server.full_url()
+                  "domain": ctx.config.server.full_url(),
+                  "BRANDING_APPLICATION_TITLE": BRANDING_APPLICATION_TITLE,
+                  "BRANDING_COMPANY_ADDRESS": BRANDING_COMPANY_ADDRESS
                 }),
                 ..Default::default()
             },
@@ -53,7 +56,9 @@ impl AuthMailer {
                 locals: json!({
                   "name": user.name,
                   "resetToken": user.reset_token,
-                  "domain": ctx.config.server.full_url()
+                  "domain": ctx.config.server.full_url(),
+                  "BRANDING_APPLICATION_TITLE": BRANDING_APPLICATION_TITLE,
+                  "BRANDING_COMPANY_ADDRESS": BRANDING_COMPANY_ADDRESS
                 }),
                 ..Default::default()
             },

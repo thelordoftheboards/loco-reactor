@@ -1,6 +1,6 @@
 Hello {{name}},
 
-  Forgot your password? No worries! You can reset it by clicking the link below:
+  Forgot your {{BRANDING_APPLICATION_TITLE}} password? No worries! You can reset it by clicking the link below:
 
     http://{{domain}}/auth/reset?code={{resetToken}}
 
@@ -15,4 +15,4 @@ Hello {{name}},
   when prompted.
 
 Best regards,
-The Loco Reactor Team
+The {{BRANDING_APPLICATION_TITLE}} Team

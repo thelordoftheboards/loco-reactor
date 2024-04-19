@@ -1,6 +1,6 @@
 import {
-  applicationDescription,
-  applicationTitle, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  BRANDING_APPLICATION_DESCRIPTION,
+  BRANDING_APPLICATION_TITLE, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
 } from './src/data/branding-strings'
 import react from '@vitejs/plugin-react-swc'
@@ -12,7 +12,12 @@ import handlebars from 'vite-plugin-handlebars'
 export default defineConfig({
   plugins: [
     react(),
-    handlebars({ context: { applicationDescription, applicationTitle } }),
+    handlebars({
+      context: {
+        BRANDING_APPLICATION_DESCRIPTION,
+        BRANDING_APPLICATION_TITLE,
+      },
+    }),
   ],
 
   server: {
@@ -20,7 +25,6 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       '/api': {
-        // with options: http://localhost:3001/api/bar-> http://jsonplaceholder.typicode.com/bar
         target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,

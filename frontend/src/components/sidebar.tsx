@@ -2,7 +2,10 @@ import { Button } from './custom/button'
 import { Layout, LayoutHeader } from './custom/layout'
 import Nav from './nav'
 import LogoDiscreteSvg from '@/assets/logo-discrete.svg'
-import { applicationSubTitle, applicationTitle } from '@/data/branding-strings'
+import {
+  BRANDING_APPLICATION_SUBTITLE,
+  BRANDING_APPLICATION_TITLE,
+} from '@/data/branding-strings'
 import { sidelinks } from '@/data/sidelinks'
 import { cn } from '@/lib/utils'
 import { IconChevronsLeft, IconMenu2, IconX } from '@tabler/icons-react'
@@ -56,8 +59,8 @@ export default function Sidebar2({
             <div
               className={`flex flex-col justify-end truncate ${isCollapsed ? 'invisible w-0' : 'visible w-auto'}`}
             >
-              <span className='font-medium'>{applicationTitle}</span>
-              <span className='text-xs'>{applicationSubTitle}</span>
+              <span className='font-medium'>{BRANDING_APPLICATION_TITLE}</span>
+              <span className='text-xs'>{BRANDING_APPLICATION_SUBTITLE}</span>
             </div>
           </div>
 
