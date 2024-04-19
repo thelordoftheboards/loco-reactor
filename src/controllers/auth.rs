@@ -101,7 +101,7 @@ async fn sign_up(
         .into_response())
 }
 
-/// Verify register user. if the user not verified his email, he can't login to
+/// Verify register user. if the user not verified his email, he can't sign in to
 /// the system.
 async fn verify(
     State(ctx): State<AppContext>,
@@ -196,7 +196,7 @@ async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -
     format::json(())
 }
 
-/// Creates a user login and returns authed user
+/// Creates a user record and returns authed user
 async fn sign_in(
     State(ctx): State<AppContext>,
     Json(params): Json<AuthSignInParams>,

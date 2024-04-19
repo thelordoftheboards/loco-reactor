@@ -20,12 +20,12 @@ export default function SignIn2() {
               <h1 className='text-2xl font-semibold tracking-tight'>Sign In</h1>
               <p className='text-sm text-muted-foreground'>
                 Enter your email and password below <br />
-                to log into your account
+                to sign into your account
               </p>
             </div>
             <SignInForm />
             <p className='mt-4 px-8 text-center text-sm text-muted-foreground'>
-              By clicking login, you agree to our
+              By clicking <strong>Sign In</strong>, you agree to our
               <LegalDocuments />.
             </p>
             <p className='px-8 text-center text-sm text-muted-foreground'>
