@@ -102,7 +102,7 @@ export function SignInForm({ className, ...props }: UserAuthFormProps) {
               )}
             />
             <Button className='mt-2' loading={isLoading}>
-              Login
+              Sign In
             </Button>
           </div>
         </form>
