@@ -1,12 +1,76 @@
 import { LOCAL_STORAGE_KEY_AUTHED_USER } from '../hooks/authed-user.localstore'
-import { ResponseError } from './api-response-error'
 
 const apiUrlBase = '/api/'
+
+//
+
+export class ResponseError extends Error {
+  constructor(
+    message: string,
+    public response_value: any
+  ) {
+    super(message)
+
+    this.response_value = response_value
+
+    console.error('ResponseError created: ', message, response_value)
+  }
+}
+
+//
+
+export async function apiGet(
+  urlRelative: string,
+  params?: Record<string, any>
+): Promise<unknown> {
+  try {
+    const headers = createHeaders()
+
+    const urlSearchParams = params
+      ? '?' + new URLSearchParams(params).toString()
+      : ''
+
+    const response = await fetch(apiUrlBase + urlRelative + urlSearchParams, {
+      method: 'GET',
+      headers,
+    })
+
+    return await processResponse(response)
+  } catch (err) {
+    throw new ResponseError(
+      'Request to server failed with exception: ' +
+        (err instanceof Error ? err.message : 'unknown') +
+        ', please try again.',
+      null
+    )
+  }
+}
 
 export async function apiPost(
   urlRelative: string,
   body: object
 ): Promise<object> {
+  try {
+    const headers = createHeaders()
+
+    const response = await fetch(apiUrlBase + urlRelative, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(body),
+    })
+
+    return await processResponse(response)
+  } catch (err) {
+    throw new ResponseError(
+      'Request to server failed with exception: ' +
+        (err instanceof Error ? err.message : 'unknown') +
+        ', please try again.',
+      null
+    )
+  }
+}
+
+function createHeaders(): RequestInit['headers'] {
   const headers: RequestInit['headers'] = {
     'Content-Type': 'application/json',
   }
@@ -21,12 +85,10 @@ export async function apiPost(
     }
   }
 
-  const response = await fetch(apiUrlBase + urlRelative, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(body),
-  })
+  return headers
+}
 
+async function processResponse(response: Response): Promise<object> {
   let value = null,
     json_error = false
   try {

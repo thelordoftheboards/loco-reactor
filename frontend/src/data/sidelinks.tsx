@@ -40,6 +40,12 @@ export const sidelinks: SideLink[] = [
     icon: <IconChecklist size={18} />,
   },
   {
+    title: 'Todos',
+    label: '',
+    href: '/todos',
+    icon: <IconChecklist size={18} />,
+  },
+  {
     title: 'Authentication',
     label: '',
     href: '',

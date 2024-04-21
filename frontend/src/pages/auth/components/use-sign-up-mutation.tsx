@@ -5,12 +5,11 @@ import { UseMutationResult, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 async function signUp(email: string, password: string): Promise<AuthedUser> {
-  // @ts-expect-error we expect a user type
   return apiPost('auth/sign-up', {
     name: email.split('@')[0],
     email,
     password,
-  })
+  }) as Promise<AuthedUser>
 }
 
 type IUseSignUpMutation = UseMutationResult<

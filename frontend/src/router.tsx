@@ -64,12 +64,6 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: 'tasks',
-        lazy: async () => ({
-          Component: (await import('./pages/tasks')).default,
-        }),
-      },
-      {
         path: 'coming-soon',
         lazy: async () => ({
           Component: (await import('@/components/coming-soon')).default,
@@ -128,6 +122,18 @@ const router = createBrowserRouter([
             errorElement: <GeneralError className='h-[50svh]' minimal />,
           },
         ],
+      },
+      {
+        path: 'tasks',
+        lazy: async () => ({
+          Component: (await import('./pages/tasks')).default,
+        }),
+      },
+      {
+        path: 'todos',
+        lazy: async () => ({
+          Component: (await import('./pages/todos')).default,
+        }),
       },
     ],
   },
