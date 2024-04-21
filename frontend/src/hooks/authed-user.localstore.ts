@@ -1,6 +1,6 @@
 import { AuthedUser } from './use-authed-user'
 
-const LOCAL_STORAGE_KEY_AUTHED_USER = 'authed-user'
+export const LOCAL_STORAGE_KEY_AUTHED_USER = 'authed-user'
 
 export function saveAuthedUser(user: AuthedUser): void {
   localStorage.setItem(LOCAL_STORAGE_KEY_AUTHED_USER, JSON.stringify(user))

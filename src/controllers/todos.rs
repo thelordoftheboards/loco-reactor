@@ -4,7 +4,11 @@
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
 
-use crate::models::_entities::todos::{ActiveModel, Entity, Model};
+use crate::models::_entities::{
+    todos,
+    todos::{ActiveModel, Model},
+    users,
+};
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Params {
@@ -18,12 +22,14 @@ impl Params {
 }
 
 async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
-    let item = Entity::find_by_id(id).one(&ctx.db).await?;
+    let item = todos::Entity::find_by_id(id).one(&ctx.db).await?;
     item.ok_or_else(|| Error::NotFound)
 }
 
-pub async fn list(State(ctx): State<AppContext>) -> Result<Json<Vec<Model>>> {
-    format::json(Entity::find().all(&ctx.db).await?)
+pub async fn list(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Json<Vec<Model>>> {
+    let user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+
+    format::json(todos::Model::find_by_user_id(&ctx.db, user.id).await?)
 }
 
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Json<Model>> {

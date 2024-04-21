@@ -5,7 +5,7 @@ export function LegalDocuments() {
     <>
       {' '}
       {branding.BRANDING_LEGAL_DOCUMENTS.map((document, ix) => (
-        <>
+        <span key={document[1]}>
           {ix === 0
             ? ' '
             : ix === branding.BRANDING_LEGAL_DOCUMENTS.length - 1
@@ -18,7 +18,7 @@ export function LegalDocuments() {
           >
             {document[0]}
           </a>
-        </>
+        </span>
       ))}
     </>
   )

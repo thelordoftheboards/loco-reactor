@@ -1,3 +1,4 @@
+import { LOCAL_STORAGE_KEY_AUTHED_USER } from '../hooks/authed-user.localstore'
 import { ResponseError } from './api-response-error'
 
 const apiUrlBase = '/api/'
@@ -6,11 +7,23 @@ export async function apiPost(
   urlRelative: string,
   body: object
 ): Promise<object> {
+  const headers: RequestInit['headers'] = {
+    'Content-Type': 'application/json',
+  }
+
+  const user = localStorage.getItem(LOCAL_STORAGE_KEY_AUTHED_USER)
+  if (user) {
+    try {
+      headers.authorization = 'Bearer ' + JSON.parse(user).token
+    } catch (_) {
+      // If the token retrieval fails for any reason, do not add authorization bearer.
+      // The server will return an error if it does not like such a request.
+    }
+  }
+
   const response = await fetch(apiUrlBase + urlRelative, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers,
     body: JSON.stringify(body),
   })
 
