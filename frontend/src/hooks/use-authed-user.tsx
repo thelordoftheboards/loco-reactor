@@ -26,6 +26,7 @@ export function useAuthedUser(): IUseAuthedUser {
     [QUERY_KEY.user],
 
     async (): Promise<AuthedUser | null> => getUserEmpty(),
+
     {
       refetchOnMount: false,
       refetchOnWindowFocus: false,
