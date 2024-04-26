@@ -163,7 +163,7 @@ async fn verify(
 async fn forgot(
     State(ctx): State<AppContext>,
     Json(params): Json<ForgotParams>,
-) -> Result<Json<()>> {
+) -> Result<Response> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller
@@ -187,7 +187,7 @@ async fn forgot(
 async fn resend(
     State(ctx): State<AppContext>,
     Json(params): Json<ForgotParams>,
-) -> Result<Json<()>> {
+) -> Result<Response> {
     let Ok(user) = users::Model::find_by_email(&ctx.db, &params.email).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller
@@ -205,7 +205,7 @@ async fn resend(
 }
 
 /// Reset user password by the given parameters
-async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Json<()>> {
+async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Response> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
         // we don't want to expose our users email. if the email is invalid we still
         // returning success to the caller
