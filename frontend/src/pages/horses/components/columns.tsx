@@ -1,10 +1,10 @@
-import { Todo } from '../data/schema'
+import { Horse } from '../data/schema'
 import { DataTableColumnHeader } from './data-table-column-header'
 import { DataTableRowActions } from './data-table-row-actions'
 import { Checkbox } from '@/components/ui/checkbox'
 import { ColumnDef } from '@tanstack/react-table'
 
-export const columns: ColumnDef<Todo>[] = [
+export const columns: ColumnDef<Horse>[] = [
   {
     id: 'select',
     header: ({ table }) => (
@@ -32,22 +32,22 @@ export const columns: ColumnDef<Todo>[] = [
   {
     accessorKey: 'id',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Todo' />
+      <DataTableColumnHeader column={column} title='Horse' />
     ),
     cell: ({ row }) => <div className='w-[80px]'>{row.getValue('id')}</div>,
     enableSorting: false,
     enableHiding: false,
   },
   {
-    accessorKey: 'text',
+    accessorKey: 'given_name',
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title='Text' />
+      <DataTableColumnHeader column={column} title='Given Name' />
     ),
     cell: ({ row }) => {
       return (
         <div className='flex space-x-2'>
           <span className='max-w-32 truncate font-medium sm:max-w-72 md:max-w-[31rem]'>
-            {row.getValue('text')}
+            {row.getValue('given_name')}
           </span>
         </div>
       )

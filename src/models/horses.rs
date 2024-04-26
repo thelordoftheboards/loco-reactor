@@ -1,12 +1,12 @@
-use super::_entities::todos::{self, ActiveModel, Model};
+use super::_entities::horses::{self, ActiveModel, Model};
 use sea_orm::entity::prelude::*;
 
 impl ActiveModelBehavior for ActiveModel {
     // extend activemodel below (keep comment for generators)
 }
 
-impl super::_entities::todos::Model {
-    /// finds all todos for a user
+impl super::_entities::horses::Model {
+    /// finds all horses for a user
     ///
     /// # Errors
     ///
@@ -15,8 +15,8 @@ impl super::_entities::todos::Model {
         db: &DatabaseConnection,
         user_id: i32,
     ) -> std::result::Result<Vec<Model>, sea_orm::DbErr> {
-        todos::Entity::find()
-            .filter(todos::Column::UserId.eq(user_id))
+        horses::Entity::find()
+            .filter(horses::Column::UserId.eq(user_id))
             .all(db)
             .await
     }

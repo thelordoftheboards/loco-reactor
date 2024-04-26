@@ -1,4 +1,4 @@
-import { todoSchema } from '../data/schema'
+import { horseSchema } from '../data/schema'
 import { Button } from '@/components/custom/button'
 import {
   DropdownMenu,
@@ -18,7 +18,7 @@ interface DataTableRowActionsProps<TData> {
 export function DataTableRowActions<TData>({
   row,
 }: DataTableRowActionsProps<TData>) {
-  const todo = todoSchema.parse(row.original)
+  const horse = horseSchema.parse(row.original)
 
   return (
     <DropdownMenu>
@@ -37,7 +37,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          Delete {todo.id}
+          Delete {horse.id}
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>

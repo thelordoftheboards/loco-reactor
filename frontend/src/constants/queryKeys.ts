@@ -1,4 +1,4 @@
 export const QUERY_KEY = {
-  todos: 'todos',
+  horses: 'horses',
   user: 'user',
 }

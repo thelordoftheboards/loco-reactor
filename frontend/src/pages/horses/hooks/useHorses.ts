@@ -1,14 +1,14 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
-import { Todo } from '@/models/todo'
+import { Horse } from '@/models/horse'
 import { apiGet, ResponseError } from '@/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
-const fetchTodos = async (): Promise<Todo[]> => {
-  return (await apiGet('todos')) as Array<Todo>
+const fetchHorses = async (): Promise<Horse[]> => {
+  return (await apiGet('horses')) as Array<Horse>
 }
 
-interface IUseTodos {
-  todos: Todo[]
+interface IUseHorses {
+  horses: Horse[]
   isLoading: boolean
   isFetching: boolean
   error?: string
@@ -19,16 +19,16 @@ function mapError(error: unknown): string {
   return 'Unknown error'
 }
 
-export const useTodos = (): IUseTodos => {
+export const useHorses = (): IUseHorses => {
   const {
-    data: todos = [],
+    data: horses = [],
     isLoading,
     isFetching,
     error,
   } = useQuery(
-    [QUERY_KEY.todos],
+    [QUERY_KEY.horses],
 
-    fetchTodos,
+    fetchHorses,
 
     {
       // refetchInterval: 1000,
@@ -38,7 +38,7 @@ export const useTodos = (): IUseTodos => {
   )
 
   return {
-    todos,
+    horses,
     isLoading,
     isFetching,
     error: mapError(error),

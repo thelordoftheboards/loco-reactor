@@ -1,4 +1,4 @@
-// TODO Add tests for Todos
+// TODO Add tests for Horses
 /*
 use loco_reactor::app::App;
 use loco_rs::testing;
@@ -12,7 +12,7 @@ async fn can_get_echo() {
             "foo": "bar",
         });
 
-        let res = request.post("/todos/echo").json(&payload).await;
+        let res = request.post("/horses/echo").json(&payload).await;
         assert_eq!(res.status_code(), 200);
         assert_eq!(res.text(), serde_json::to_string(&payload).unwrap());
     })
@@ -23,7 +23,7 @@ async fn can_get_echo() {
 #[serial]
 async fn can_request_root() {
     testing::request::<App, _, _>(|request, _ctx| async move {
-        let res = request.get("/todos").await;
+        let res = request.get("/horses").await;
         assert_eq!(res.status_code(), 200);
         assert_eq!(res.text(), "hello");
     })

@@ -2,9 +2,9 @@ import { z } from 'zod'
 
 // We're keeping a simple non-relational schema here.
 // IRL, you will have a schema for your data models.
-export const todoSchema = z.object({
+export const horseSchema = z.object({
   id: z.number(),
-  text: z.string(),
+  given_name: z.string(),
 })
 
-export type Todo = z.infer<typeof todoSchema>
+export type Horse = z.infer<typeof horseSchema>

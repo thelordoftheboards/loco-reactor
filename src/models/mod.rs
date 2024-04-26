@@ -1,4 +1,4 @@
 pub mod _entities;
+pub mod horses;
 pub mod notes;
-pub mod todos;
 pub mod users;

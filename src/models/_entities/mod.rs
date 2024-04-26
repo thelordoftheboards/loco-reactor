@@ -2,6 +2,6 @@
 
 pub mod prelude;
 
+pub mod horses;
 pub mod notes;
-pub mod todos;
 pub mod users;

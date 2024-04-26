@@ -5,6 +5,7 @@ import {
   IconComponents,
   IconError404,
   IconExclamationCircle,
+  IconHorse,
   IconHexagonNumber1,
   IconHexagonNumber2,
   IconHexagonNumber3,
@@ -40,10 +41,10 @@ export const sidelinks: SideLink[] = [
     icon: <IconChecklist size={18} />,
   },
   {
-    title: 'Todos',
+    title: 'Horses',
     label: '',
-    href: '/todos',
-    icon: <IconChecklist size={18} />,
+    href: '/horses',
+    icon: <IconHorse size={18} />,
   },
   {
     title: 'Authentication',

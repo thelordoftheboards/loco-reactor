@@ -5,31 +5,31 @@ use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
 
 use crate::models::_entities::{
-    todos,
-    todos::{ActiveModel, Model},
+    horses,
+    horses::{ActiveModel, Model},
     users,
 };
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Params {
-    pub text: String,
+    pub given_name: String,
 }
 
 impl Params {
     fn update(&self, item: &mut ActiveModel) {
-        item.text = Set(self.text.clone());
+        item.given_name = Set(self.given_name.clone());
     }
 }
 
 async fn load_item(ctx: &AppContext, id: i32) -> Result<Model> {
-    let item = todos::Entity::find_by_id(id).one(&ctx.db).await?;
+    let item = horses::Entity::find_by_id(id).one(&ctx.db).await?;
     item.ok_or_else(|| Error::NotFound)
 }
 
 pub async fn list(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Json<Vec<Model>>> {
     let user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
 
-    format::json(todos::Model::find_by_user_id(&ctx.db, user.id).await?)
+    format::json(horses::Model::find_by_user_id(&ctx.db, user.id).await?)
 }
 
 pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Json<Model>> {
@@ -64,7 +64,7 @@ pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Resu
 
 pub fn routes() -> Routes {
     Routes::new()
-        .prefix("todos")
+        .prefix("horses")
         .add("/", get(list))
         .add("/", post(add))
         .add("/:id", get(get_one))

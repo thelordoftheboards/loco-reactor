@@ -130,9 +130,9 @@ const router = createBrowserRouter([
         }),
       },
       {
-        path: 'todos',
+        path: 'horses',
         lazy: async () => ({
-          Component: (await import('./pages/todos')).default,
+          Component: (await import('./pages/horses')).default,
         }),
       },
     ],

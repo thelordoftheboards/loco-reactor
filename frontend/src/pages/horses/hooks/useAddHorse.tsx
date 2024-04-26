@@ -1,15 +1,15 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import { toast } from '@/components/ui/use-toast'
-import { Todo } from '@/models/todo'
+import { Horse } from '@/models/horse'
 import { apiPost, ResponseError } from '@/utils/api'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-const postTodo = async (text: Todo['text']): Promise<Todo> => {
-  return (await apiPost('todos', { text })) as Todo
+const postHorse = async (given_name: Horse['given_name']): Promise<Horse> => {
+  return (await apiPost('horses', { given_name })) as Horse
 }
 
-interface IUseAddTodo {
-  addTodo: (text: Todo['text']) => void
+interface IUseAddHorse {
+  addHorse: (given_name: Horse['given_name']) => void
 }
 
 function mapError(error: unknown): string {
@@ -17,21 +17,21 @@ function mapError(error: unknown): string {
   return 'Unknown error'
 }
 
-export const useAddTodo = (): IUseAddTodo => {
+export const useAddHorse = (): IUseAddHorse => {
   const client = useQueryClient()
-  const { mutate: addTodo } = useMutation(postTodo, {
+  const { mutate: addHorse } = useMutation(postHorse, {
     onSuccess: () => {
       toast({
-        title: 'Todo added',
+        title: 'Horse added',
       })
 
-      client.invalidateQueries([QUERY_KEY.todos])
+      client.invalidateQueries([QUERY_KEY.horses])
     },
     onError: (error) => {
       const errorMessage = mapError(error)
 
       toast({
-        title: 'Todo could not be added',
+        title: 'Horse could not be added',
         description: (
           <pre className='mt-2 w-[340px] rounded-md bg-slate-950 p-4'>
             <code className='text-white'>{errorMessage}</code>
@@ -42,6 +42,6 @@ export const useAddTodo = (): IUseAddTodo => {
   })
 
   return {
-    addTodo,
+    addHorse,
   }
 }

@@ -8,14 +8,14 @@ impl MigrationTrait for Migration {
     async fn up(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
             .create_table(
-                table_auto(Todos::Table)
-                    .col(pk_auto(Todos::Id))
-                    .col(string(Todos::Text))
-                    .col(integer(Todos::UserId))
+                table_auto(Horses::Table)
+                    .col(pk_auto(Horses::Id))
+                    .col(string(Horses::GivenName))
+                    .col(integer(Horses::UserId))
                     .foreign_key(
                         ForeignKey::create()
-                            .name("fk-todos-users")
-                            .from(Todos::Table, Todos::UserId)
+                            .name("fk-horses-users")
+                            .from(Horses::Table, Horses::UserId)
                             .to(Users::Table, Users::Id)
                             .on_delete(ForeignKeyAction::Cascade)
                             .on_update(ForeignKeyAction::Cascade),
@@ -27,16 +27,16 @@ impl MigrationTrait for Migration {
 
     async fn down(&self, manager: &SchemaManager) -> Result<(), DbErr> {
         manager
-            .drop_table(Table::drop().table(Todos::Table).to_owned())
+            .drop_table(Table::drop().table(Horses::Table).to_owned())
             .await
     }
 }
 
 #[derive(DeriveIden)]
-enum Todos {
+enum Horses {
     Table,
     Id,
-    Text,
+    GivenName,
     UserId,
 }
 
