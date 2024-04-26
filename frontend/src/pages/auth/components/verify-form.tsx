@@ -53,7 +53,7 @@ export function VerifyForm({ className, ...props }: VerifyFormProps) {
         userLocalStorage.saveAuthedUser(authedUser)
 
         // Clear the query result to force re-load from local storage
-        queryClient.removeQueries([QUERY_KEY.user])
+        queryClient.removeQueries({ queryKey: [QUERY_KEY.user] })
 
         // Since we know we have authed, we can go to root
         navigate('/')

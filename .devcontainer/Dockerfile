@@ -9,5 +9,6 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
 # Install Node.js and npm
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - \
     && apt-get install -y nodejs
+RUN npm i -g npm-check-updates
 
 COPY .env /.env

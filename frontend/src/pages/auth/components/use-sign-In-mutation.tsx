@@ -26,7 +26,8 @@ export function useSignInMutation(): ISignInMutation {
     unknown,
     { email: string; password: string },
     unknown
-  >(({ email, password }) => signIn(email, password), {
+  >({
+    mutationFn: ({ email, password }) => signIn(email, password),
     onSuccess: (data) => {
       // We will not store the results into react query. When the user navigates to a page
       // that has 'withAuthedUser', the query results will be empty and this will force call

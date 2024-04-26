@@ -22,10 +22,10 @@ function parseUserAndAddInitials(strUser: string): AuthedUser {
   return authedUser
 }
 
-export function getAuthedUser(): AuthedUser | undefined {
+export function getAuthedUser(): AuthedUser | null {
   const user = localStorage.getItem(LOCAL_STORAGE_KEY_AUTHED_USER)
 
-  return user ? parseUserAndAddInitials(user) : undefined
+  return user ? parseUserAndAddInitials(user) : null
 }
 
 export function removeAuthedUser(): void {

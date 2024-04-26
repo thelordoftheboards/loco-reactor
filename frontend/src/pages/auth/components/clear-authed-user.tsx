@@ -6,7 +6,7 @@ import { useEffect } from 'react'
 export default function ClearAuthedUser() {
   useEffect(() => {
     userLocalStorage.removeAuthedUser()
-    queryClient.removeQueries([QUERY_KEY.user])
+    queryClient.removeQueries({ queryKey: [QUERY_KEY.user] })
   }, [])
   return <></>
 }

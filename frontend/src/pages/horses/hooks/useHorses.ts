@@ -25,17 +25,13 @@ export const useHorses = (): IUseHorses => {
     isLoading,
     isFetching,
     error,
-  } = useQuery(
-    [QUERY_KEY.horses],
-
-    fetchHorses,
-
-    {
-      // refetchInterval: 1000,
-      refetchOnWindowFocus: false,
-      retry: 2,
-    }
-  )
+  } = useQuery({
+    queryKey: [QUERY_KEY.horses],
+    queryFn: fetchHorses,
+    // refetchInterval: 1000,
+    refetchOnWindowFocus: false,
+    retry: 2,
+  })
 
   return {
     horses,

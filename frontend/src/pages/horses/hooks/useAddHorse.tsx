@@ -19,13 +19,14 @@ function mapError(error: unknown): string {
 
 export const useAddHorse = (): IUseAddHorse => {
   const client = useQueryClient()
-  const { mutate: addHorse } = useMutation(postHorse, {
+  const { mutate: addHorse } = useMutation({
+    mutationFn: postHorse,
     onSuccess: () => {
       toast({
         title: 'Horse added',
       })
 
-      client.invalidateQueries([QUERY_KEY.horses])
+      client.invalidateQueries({ queryKey: [QUERY_KEY.horses] })
     },
     onError: (error) => {
       const errorMessage = mapError(error)

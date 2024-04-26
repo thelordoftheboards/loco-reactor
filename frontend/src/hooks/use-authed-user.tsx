@@ -22,28 +22,26 @@ interface IUseAuthedUser {
 }
 
 export function useAuthedUser(): IUseAuthedUser {
-  const { data: user } = useQuery<AuthedUser | null>(
-    [QUERY_KEY.user],
-
-    async (): Promise<AuthedUser | null> => getUserEmpty(),
-
-    {
-      refetchOnMount: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
-      initialData: userLocalStorage.getAuthedUser,
-      onError: () => {
-        userLocalStorage.removeAuthedUser()
-      },
-    }
-  )
+  const query = useQuery<AuthedUser | null>({
+    queryKey: [QUERY_KEY.user],
+    queryFn: getUserEmpty,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    initialData: userLocalStorage.getAuthedUser,
+  })
 
   useEffect(() => {
-    if (!user) userLocalStorage.removeAuthedUser()
-    else userLocalStorage.saveAuthedUser(user)
-  }, [user])
+    if (query.error) {
+      userLocalStorage.removeAuthedUser()
+    }
+  }, [query.error])
+
+  useEffect(() => {
+    if (query.data) userLocalStorage.saveAuthedUser(query.data)
+  }, [query.data])
 
   return {
-    user: user ?? null,
+    user: query.data ?? null,
   }
 }
