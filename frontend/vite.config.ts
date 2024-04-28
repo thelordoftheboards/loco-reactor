@@ -1,6 +1,9 @@
 import {
   BRANDING_APPLICATION_DESCRIPTION,
-  BRANDING_APPLICATION_TITLE, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  BRANDING_APPLICATION_TITLE,
+  BRANDING_APPLICATION_URL,
+  BRANDING_APPLICATION_IMAGE_URL,
+  BRANDING_APPLICATION_THEME_COLOR, // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
 } from './src/data/branding-strings'
 import react from '@vitejs/plugin-react-swc'
@@ -16,6 +19,9 @@ export default defineConfig({
       context: {
         BRANDING_APPLICATION_DESCRIPTION,
         BRANDING_APPLICATION_TITLE,
+        BRANDING_APPLICATION_URL,
+        BRANDING_APPLICATION_IMAGE_URL,
+        BRANDING_APPLICATION_THEME_COLOR,
       },
     }),
   ],
