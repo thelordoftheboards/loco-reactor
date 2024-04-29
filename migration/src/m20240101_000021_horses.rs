@@ -29,6 +29,15 @@ impl MigrationTrait for Migration {
                             .on_delete(ForeignKeyAction::Restrict)
                             .on_update(ForeignKeyAction::Restrict),
                     )
+                    .col(integer(Horses::ColorId))
+                    .foreign_key(
+                        ForeignKey::create()
+                            .name("fk-horses-horse-colors")
+                            .from(Horses::Table, Horses::ColorId)
+                            .to(HorseColors::Table, HorseColors::Id)
+                            .on_delete(ForeignKeyAction::Restrict)
+                            .on_update(ForeignKeyAction::Restrict),
+                    )
                     .to_owned(),
             )
             .await
@@ -46,8 +55,15 @@ enum Horses {
     Table,
     Id,
     GivenName,
+    ColorId,
     GenderId,
     UserId,
+}
+
+#[derive(DeriveIden)]
+enum HorseColors {
+    Table,
+    Id,
 }
 
 #[derive(DeriveIden)]

@@ -2,6 +2,7 @@
 
 pub mod prelude;
 
+pub mod horse_colors;
 pub mod horse_genders;
 pub mod horses;
 pub mod notes;

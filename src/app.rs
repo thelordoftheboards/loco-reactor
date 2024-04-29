@@ -16,7 +16,7 @@ use sea_orm::DatabaseConnection;
 
 use crate::{
     controllers, initializers,
-    models::_entities::{horse_genders, notes, users},
+    models::_entities::{horse_colors, horse_genders, notes, users},
     tasks,
     workers::downloader::DownloadWorker,
 };
@@ -68,6 +68,7 @@ impl Hooks for App {
     async fn truncate(db: &DatabaseConnection) -> Result<()> {
         truncate_table(db, users::Entity).await?;
         truncate_table(db, notes::Entity).await?;
+        truncate_table(db, horse_colors::Entity).await?;
         truncate_table(db, horse_genders::Entity).await?;
         Ok(())
     }
@@ -75,6 +76,11 @@ impl Hooks for App {
     async fn seed(db: &DatabaseConnection, base: &Path) -> Result<()> {
         db::seed::<users::ActiveModel>(db, &base.join("users.yaml").display().to_string()).await?;
         db::seed::<notes::ActiveModel>(db, &base.join("notes.yaml").display().to_string()).await?;
+        db::seed::<horse_colors::ActiveModel>(
+            db,
+            &base.join("horse_colors.yaml").display().to_string(),
+        )
+        .await?;
         db::seed::<horse_genders::ActiveModel>(
             db,
             &base.join("horse_genders.yaml").display().to_string(),

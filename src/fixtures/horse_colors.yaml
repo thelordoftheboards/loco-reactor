@@ -1,0 +1,6 @@
+---
+- id: 1
+  name: Red
+  description: Red
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"

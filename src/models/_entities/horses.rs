@@ -12,11 +12,20 @@ pub struct Model {
     pub id: i32,
     pub given_name: String,
     pub user_id: i32,
+    pub color_id: i32,
     pub gender_id: i32,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
 pub enum Relation {
+    #[sea_orm(
+        belongs_to = "super::horse_colors::Entity",
+        from = "Column::ColorId",
+        to = "super::horse_colors::Column::Id",
+        on_update = "Restrict",
+        on_delete = "Restrict"
+    )]
+    HorseColors,
     #[sea_orm(
         belongs_to = "super::horse_genders::Entity",
         from = "Column::GenderId",
@@ -33,6 +42,12 @@ pub enum Relation {
         on_delete = "Cascade"
     )]
     Users,
+}
+
+impl Related<super::horse_colors::Entity> for Entity {
+    fn to() -> RelationDef {
+        Relation::HorseColors.def()
+    }
 }
 
 impl Related<super::horse_genders::Entity> for Entity {
