@@ -1,6 +1,161 @@
 ---
 - id: 1
-  name: Red
-  description: Red
+  name: Bay
+  description: Bay
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 2
+  name: Bay Overo
+  description: Bay Overo
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 3
+  name: Bay Roan
+  description: Bay Roan
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 4
+  name: Black
+  description: Black
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 5
+  name: Black Overo
+  description: Black Overo
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 6
+  name: Blue Roan
+  description: Blue Roan
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 7
+  name: Brindle
+  description: Brindle
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 8
+  name: Brown
+  description: Brown
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 9
+  name: Buckskin
+  description: Buckskin
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 10
+  name: Champagne
+  description: Champagne
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 11
+  name: Chestnut
+  description: Chestnut
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 12
+  name: Chocolate
+  description: Chocolate
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 13
+  name: Cremello
+  description: Cremello
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 14
+  name: Dun
+  description: Dun
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 15
+  name: Grey
+  description: Grey
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 16
+  name: Grulla
+  description: Grulla
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 17
+  name: Isabela
+  description: Isabela
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 18
+  name: Overo
+  description: Overo
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 19
+  name: Palomino
+  description: Palomino
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 20
+  name: Perlina
+  description: Perlina
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 21
+  name: Piebald
+  description: Piebald
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 22
+  name: Pinto
+  description: Pinto
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 23
+  name: Red Dun
+  description: Red Dun
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 24
+  name: Red Roan
+  description: Red Roan
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 25
+  name: Roan
+  description: Roan
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 26
+  name: Sabino
+  description: Sabino
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 27
+  name: Silver
+  description: Silver
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 28
+  name: Smokey
+  description: Smokey
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 29
+  name: Sorrel
+  description: Sorrel
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 30
+  name: Tobiano
+  description: Tobiano
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 31
+  name: Tovero
+  description: Tovero
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 32
+  name: White
+  description: White
   created_at: "2024-01-01T01:01:01.001"
   updated_at: "2024-01-01T01:01:01.001"
