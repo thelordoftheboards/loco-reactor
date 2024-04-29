@@ -6,6 +6,7 @@ export const horseSchema = z.object({
   id: z.number(),
   given_name: z.string(),
   gender_id: z.number(),
+  color_id: z.number(),
 })
 
 export type Horse = z.infer<typeof horseSchema>
