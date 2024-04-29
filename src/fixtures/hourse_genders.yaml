@@ -1,0 +1,56 @@
+---
+- id: 1
+  name: Male
+  description: Male
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 2
+  name: Female
+  description: Female
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 3
+  name: Colt
+  description: Colt M
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 4
+  name: Filly
+  description: Filly F
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 5
+  name: Foal
+  description: Foal
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 6
+  name: Gelding
+  description: Gelding M
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 7
+  name: Ridgling
+  description: Ridgling M
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 8
+  name: Mare
+  description: Mare F
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 9
+  name: Stallion
+  description: Stallion M
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 10
+  name: Weanling
+  description: Weanling
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"
+- id: 11
+  name: Yearling
+  description: Yearling
+  created_at: "2024-01-01T01:01:01.001"
+  updated_at: "2024-01-01T01:01:01.001"

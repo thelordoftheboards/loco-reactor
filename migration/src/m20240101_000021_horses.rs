@@ -20,6 +20,15 @@ impl MigrationTrait for Migration {
                             .on_delete(ForeignKeyAction::Cascade)
                             .on_update(ForeignKeyAction::Cascade),
                     )
+                    .col(integer(Horses::GenderId))
+                    .foreign_key(
+                        ForeignKey::create()
+                            .name("fk-horses-horse-genders")
+                            .from(Horses::Table, Horses::GenderId)
+                            .to(HorseGenders::Table, HorseGenders::Id)
+                            .on_delete(ForeignKeyAction::Restrict)
+                            .on_update(ForeignKeyAction::Restrict),
+                    )
                     .to_owned(),
             )
             .await
@@ -37,7 +46,14 @@ enum Horses {
     Table,
     Id,
     GivenName,
+    GenderId,
     UserId,
+}
+
+#[derive(DeriveIden)]
+enum HorseGenders {
+    Table,
+    Id,
 }
 
 #[derive(DeriveIden)]

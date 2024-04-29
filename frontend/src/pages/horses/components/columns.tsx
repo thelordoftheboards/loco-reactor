@@ -54,6 +54,15 @@ export const columns: ColumnDef<Horse>[] = [
     },
   },
   {
+    accessorKey: 'gender_id',
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title='Gender' />
+    ),
+    cell: ({ row }) => <div className='w-[80px]'>{row.getValue('gender_id')}</div>,
+    enableSorting: false,
+    enableHiding: false,
+  },
+  {
     id: 'actions',
     cell: ({ row }) => <DataTableRowActions row={row} />,
   },
