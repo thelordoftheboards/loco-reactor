@@ -2,26 +2,29 @@ import { QUERY_KEY } from '../../../constants/queryKeys'
 import { toast } from '@/components/ui/use-toast'
 import { Horse } from '@/models/horse'
 import { apiPost, ResponseError } from '@/utils/api'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
+import {
+  UseMutationResult,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query'
 
-const postHorse = async (given_name: Horse['given_name']): Promise<Horse> => {
-  return (await apiPost('horses', { given_name })) as Horse
+const postHorse = async (horse: Horse): Promise<Horse> => {
+  return (await apiPost('horses', horse)) as Horse
 }
 
-interface IUseAddHorse {
-  addHorse: (given_name: Horse['given_name']) => void
-}
+type IUseAddHorseMutation = UseMutationResult<Horse, unknown, Horse, unknown>
 
 function mapError(error: unknown): string {
   if (error instanceof ResponseError) return error.message
   return 'Unknown error'
 }
 
-export const useAddHorse = (): IUseAddHorse => {
+export const useAddHorseMutation = (): IUseAddHorseMutation => {
   const client = useQueryClient()
-  const { mutate: addHorse } = useMutation({
+  const addHorseMutation = useMutation({
     mutationFn: postHorse,
     onSuccess: () => {
+      // XXXXX - does this need to be removed? Error handling should happen on form.
       toast({
         title: 'Horse added',
       })
@@ -29,6 +32,7 @@ export const useAddHorse = (): IUseAddHorse => {
       client.invalidateQueries({ queryKey: [QUERY_KEY.horses] })
     },
     onError: (error) => {
+      // XXXXX - does this need to be removed? Error handling should happen on form.
       const errorMessage = mapError(error)
 
       toast({
@@ -42,7 +46,5 @@ export const useAddHorse = (): IUseAddHorse => {
     },
   })
 
-  return {
-    addHorse,
-  }
+  return addHorseMutation
 }

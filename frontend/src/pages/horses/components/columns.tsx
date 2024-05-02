@@ -58,7 +58,9 @@ export const columns: ColumnDef<Horse>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Gender' />
     ),
-    cell: ({ row }) => <div className='w-[80px]'>{row.getValue('gender_id')}</div>,
+    cell: ({ row }) => (
+      <div className='w-[80px]'>{row.getValue('gender_id')}</div>
+    ),
     enableSorting: false,
     enableHiding: false,
   },
@@ -67,7 +69,9 @@ export const columns: ColumnDef<Horse>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title='Color' />
     ),
-    cell: ({ row }) => <div className='w-[80px]'>{row.getValue('color_id')}</div>,
+    cell: ({ row }) => (
+      <div className='w-[80px]'>{row.getValue('color_id')}</div>
+    ),
     enableSorting: false,
     enableHiding: false,
   },

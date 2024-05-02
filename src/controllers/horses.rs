@@ -1,6 +1,7 @@
 #![allow(clippy::missing_errors_doc)]
 #![allow(clippy::unnecessary_struct_initialization)]
 #![allow(clippy::unused_async)]
+
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
 
@@ -12,12 +13,18 @@ use crate::models::_entities::{
 
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct Params {
+    pub id: i32,
     pub given_name: String,
+    pub gender_id: i32,
+    pub color_id: i32,
 }
 
 impl Params {
     fn update(&self, item: &mut ActiveModel) {
+        item.id = Set(self.id.clone());
         item.given_name = Set(self.given_name.clone());
+        item.gender_id = Set(self.gender_id.clone());
+        item.color_id = Set(self.color_id.clone());
     }
 }
 
@@ -32,11 +39,18 @@ pub async fn list(auth: auth::JWT, State(ctx): State<AppContext>) -> Result<Resp
     format::json(horses::Model::find_by_user_id(&ctx.db, user.id).await?)
 }
 
-pub async fn add(State(ctx): State<AppContext>, Json(params): Json<Params>) -> Result<Response> {
+pub async fn add(
+    auth: auth::JWT,
+    State(ctx): State<AppContext>,
+    Json(params): Json<Params>,
+) -> Result<Response> {
+    let user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
     let mut item = ActiveModel {
         ..Default::default()
     };
     params.update(&mut item);
+    item.user_id = sea_orm::ActiveValue::Set(user.id);
+    item.id = sea_orm::ActiveValue::NotSet; // Auto number will give new id
     let item = item.insert(&ctx.db).await?;
     format::json(item)
 }
