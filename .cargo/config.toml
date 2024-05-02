@@ -1,3 +1,4 @@
 [alias]
-dev = "run start --server-and-worker"
+dev-sw = ["watch", "-i", "frontend", "-x", "check", "-s", "cargo dev-s"]
+dev-s = "run start --server-and-worker"
 loco = "run --"

@@ -1,0 +1,10 @@
+[tasks.server]
+command = [
+  "cargo",
+  "dev-sw"
+]
+
+[tasks.client]
+command = [
+  "cd frontend && npm run dev"
+]
