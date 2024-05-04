@@ -56,10 +56,14 @@ pub async fn add(
 }
 
 pub async fn update(
+    auth: auth::JWT,
     Path(id): Path<i32>,
     State(ctx): State<AppContext>,
     Json(params): Json<Params>,
 ) -> Result<Response> {
+    let _user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+    // TODO Make sure horse belongs to user
+
     let item = load_item(&ctx, id).await?;
     let mut item = item.into_active_model();
     params.update(&mut item);
@@ -67,12 +71,26 @@ pub async fn update(
     format::json(item)
 }
 
-pub async fn remove(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+pub async fn remove(
+    auth: auth::JWT,
+    Path(id): Path<i32>,
+    State(ctx): State<AppContext>,
+) -> Result<Response> {
+    let _user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+    // TODO Make sure horse belongs to user
+
     load_item(&ctx, id).await?.delete(&ctx.db).await?;
     format::empty()
 }
 
-pub async fn get_one(Path(id): Path<i32>, State(ctx): State<AppContext>) -> Result<Response> {
+pub async fn get_one(
+    auth: auth::JWT,
+    Path(id): Path<i32>,
+    State(ctx): State<AppContext>,
+) -> Result<Response> {
+    let _user = users::Model::find_by_pid(&ctx.db, &auth.claims.pid).await?;
+    // TODO Make sure horse belongs to user
+
     format::json(load_item(&ctx, id).await?)
 }
 

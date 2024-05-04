@@ -1,5 +1,6 @@
 import { horseSchema } from '../data/schema'
 import { useAddHorseMutation } from '../hooks/use-add-horse-mutation'
+import { useUpdateHorseMutation } from '../hooks/use-update-horse-mutation'
 import { Button } from '@/components/custom/button'
 import {
   Form,
@@ -25,6 +26,7 @@ export function PropertiesForm({
 }) {
   const [isLoadingForm, setIsLoadingForm] = useState(false)
   const addHorseMutation = useAddHorseMutation()
+  const updateHorseMutation = useUpdateHorseMutation()
 
   const form = useForm<z.infer<typeof horseSchema>>({
     resolver: zodResolver(horseSchema),
@@ -35,7 +37,11 @@ export function PropertiesForm({
     setIsLoadingForm(true)
 
     try {
-      await addHorseMutation.mutateAsync(data)
+      if (data.id === 0) {
+        await addHorseMutation.mutateAsync(data)
+      } else {
+        updateHorseMutation.mutateAsync(data)
+      }
     } catch (err: unknown) {
       const error = err as Error
       form.setError('given_name', { type: 'manual', message: error.message })
@@ -81,7 +87,7 @@ export function PropertiesForm({
                 )}
               />
               <Button className='mt-2' loading={isLoadingForm}>
-                {horse.id ? 'Add New' : 'Save'}
+                {horse.id === 0 ? 'Add New' : 'Save'}
               </Button>
             </div>
           </form>
