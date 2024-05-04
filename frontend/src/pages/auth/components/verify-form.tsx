@@ -1,7 +1,7 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import * as userLocalStorage from '../../../hooks/authed-user.localstore'
 import { queryClient } from '../../../react-query/client'
-import { apiPost } from '../../../utils/api'
+import { apiCall } from '../../../utils/api'
 import { Button } from '@/components/custom/button'
 import {
   Form,
@@ -43,7 +43,7 @@ export function VerifyForm({ className, ...props }: VerifyFormProps) {
 
     try {
       // If the API request succeeds, then the user is verfied on the server
-      await apiPost('auth/verify', data)
+      await apiCall('POST', 'auth/verify', data)
 
       if (authedUser) {
         // We have the authed user here, mark it as verified locally

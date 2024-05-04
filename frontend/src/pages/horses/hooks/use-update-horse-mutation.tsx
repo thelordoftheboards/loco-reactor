@@ -1,7 +1,7 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import { toast } from '@/components/ui/use-toast'
 import { Horse } from '@/models/horse'
-import { apiPost, ResponseError } from '@/utils/api'
+import { apiCall, ResponseError } from '@/utils/api'
 import {
   UseMutationResult,
   useMutation,
@@ -9,7 +9,7 @@ import {
 } from '@tanstack/react-query'
 
 const postHorse = async (horse: Horse): Promise<Horse> => {
-  return (await apiPost(`horses/${horse.id}`, horse)) as Horse
+  return (await apiCall('POST', `horses/${horse.id}`, horse)) as Horse
 }
 
 type IUseUpdateHorseMutation = UseMutationResult<Horse, unknown, Horse, unknown>

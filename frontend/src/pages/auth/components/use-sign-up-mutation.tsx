@@ -1,11 +1,11 @@
 import * as userLocalStorage from '../../../hooks/authed-user.localstore'
 import { AuthedUser } from '../../../hooks/use-authed-user'
-import { apiPost } from '../../../utils/api'
+import { apiCall } from '../../../utils/api'
 import { UseMutationResult, useMutation } from '@tanstack/react-query'
 import { useNavigate } from 'react-router-dom'
 
 async function signUp(email: string, password: string): Promise<AuthedUser> {
-  return apiPost('auth/sign-up', {
+  return apiCall('POST', 'auth/sign-up', {
     name: email.split('@')[0],
     email,
     password,

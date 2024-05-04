@@ -46,7 +46,8 @@ export async function apiGet(
   }
 }
 
-export async function apiPost(
+export async function apiCall(
+  method: 'POST' | 'PUT' | 'PATCH' | 'DELETE',
   urlRelative: string,
   body: object
 ): Promise<object> {
@@ -54,7 +55,7 @@ export async function apiPost(
     const headers = createHeaders()
 
     const response = await fetch(apiUrlBase + urlRelative, {
-      method: 'POST',
+      method,
       headers,
       body: JSON.stringify(body),
     })

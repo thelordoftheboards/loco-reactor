@@ -1,4 +1,4 @@
-import { apiPost } from '../../../utils/api'
+import { apiCall } from '../../../utils/api'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import {
@@ -40,7 +40,7 @@ export function ResendForm({ className, ...props }: ResendFormProps) {
 
     try {
       // If the API request succeeds, then the user is verfied on the server
-      await apiPost('auth/resend', data)
+      await apiCall('POST', 'auth/resend', data)
 
       // As log as the reset is successful, take the user to the verification
       navigate('/auth/verify')
