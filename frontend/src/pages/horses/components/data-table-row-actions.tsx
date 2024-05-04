@@ -52,7 +52,7 @@ export function DataTableRowActions<TData>({
       </DropdownMenu>
 
       <Dialog open={openProperties} onOpenChange={setOpenProperties}>
-        <DialogContentProperties id={horse.id} setOpen={setOpenProperties} />
+        {openProperties && <DialogContentProperties id={horse.id} setOpen={setOpenProperties} />}
       </Dialog>
     </>
   )
