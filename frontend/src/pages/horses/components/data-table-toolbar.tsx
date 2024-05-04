@@ -14,16 +14,12 @@ export function DataTableToolbar() {
       <div className='flex gap-x-2'>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
-            <Button
-              variant='outline'
-              size='sm'
-              className='ml-auto hidden h-8 lg:flex'
-            >
+            <Button variant='outline' size='sm' className='ml-auto h-8 lg:flex'>
               <IconPlus size={18} />
               Add New
             </Button>
           </DialogTrigger>
-          <DialogContentProperties setOpen={setOpen} />
+          <DialogContentProperties id={0} setOpen={setOpen} />
         </Dialog>
       </div>
     </div>

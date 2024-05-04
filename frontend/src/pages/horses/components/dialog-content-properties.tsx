@@ -1,3 +1,4 @@
+import { useHorse } from '../hooks/useHorse'
 import { PropertiesForm } from './properties-form'
 import {
   DialogContent,
@@ -8,20 +9,29 @@ import {
 import { Dispatch } from 'react'
 
 export function DialogContentProperties({
+  id,
   setOpen,
 }: {
+  id: number
   setOpen: Dispatch<React.SetStateAction<boolean>>
 }) {
+  const {
+    horse,
+    // isLoading: isLoadingHorse,
+    // isFetching: isFetchingHorse,
+    // error: errorHorse,
+  } = useHorse(id)
+
   return (
     <DialogContent className='sm:max-w-[425px]'>
       <DialogHeader>
-        <DialogTitle>Edit profile</DialogTitle>
+        <DialogTitle>Edit Horse</DialogTitle>
         <DialogDescription>
-          Make changes to your profile here. Click save when you're done.
+          Make changes to your horse here. Click save when you're done.
         </DialogDescription>
       </DialogHeader>
 
-      <PropertiesForm setOpen={setOpen} />
+      {horse && <PropertiesForm setOpen={setOpen} horse={horse} />}
     </DialogContent>
   )
 }

@@ -3,12 +3,21 @@ import { Horse } from '@/models/horse'
 import { apiGet, ResponseError } from '@/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
-const fetchHorses = async (): Promise<Horse[]> => {
-  return (await apiGet('horses')) as Array<Horse>
+const fetchHorse = async (id: number): Promise<Horse> => {
+  if (id === 0)
+    return {
+      id: 0,
+      given_name: '',
+      gender_id: 1,
+      color_id: 1,
+    }
+
+  const horse = (await apiGet(`horses/${id}`)) as Horse
+  return horse
 }
 
-interface IUseHorses {
-  horses: Horse[]
+interface IUseHorse {
+  horse: Horse | undefined
   isLoading: boolean
   isFetching: boolean
   error?: string
@@ -16,24 +25,25 @@ interface IUseHorses {
 
 function mapError(error: unknown): string {
   if (error instanceof ResponseError) return error.message
-  return 'Unknown error'
+  if (error instanceof Error) return 'Unexpected error: ' + error.message
+  return ''
 }
 
-export const useHorses = (): IUseHorses => {
+export const useHorse = (id: number): IUseHorse => {
   const {
-    data: horses = [],
+    data: horse,
     isLoading,
     isFetching,
     error,
   } = useQuery({
-    queryKey: [QUERY_KEY.horses],
-    queryFn: fetchHorses,
+    queryKey: [QUERY_KEY.horse, id],
+    queryFn: () => fetchHorse(id),
     refetchOnWindowFocus: false,
     retry: 2,
   })
 
   return {
-    horses,
+    horse,
     isLoading,
     isFetching,
     error: mapError(error),

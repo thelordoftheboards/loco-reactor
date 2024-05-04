@@ -1,6 +1,5 @@
 import { columns } from './components/columns'
 import { DataTable } from './components/data-table'
-//import { tasks } from './data/tasks'
 import { useHorses } from './hooks/useHorses'
 import { Layout, LayoutBody, LayoutHeader } from '@/components/custom/layout'
 import { Search } from '@/components/search'

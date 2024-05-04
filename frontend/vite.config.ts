@@ -73,7 +73,7 @@ export default defineConfig({
             req['req_seq_no'] = req_seq_no
             const requestBody = await getPostData(req)
             console.log(
-              chalk.gray.bgBlack('[API ' + req_seq_no + ']') + '-->',
+              chalk.gray('[API ' + req_seq_no + ']') + chalk.yellow(' -->'),
               req.method,
               req.url,
               requestBody
@@ -82,7 +82,7 @@ export default defineConfig({
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           proxy.on('proxyRes', (proxyRes, req, _res) => {
             console.log(
-              chalk.gray.bgBlack('[API ' + req['req_seq_no'] + ']'),
+              chalk.gray('[API ' + req['req_seq_no'] + ']'),
               proxyRes.statusCode,
               req.method,
               req.url
