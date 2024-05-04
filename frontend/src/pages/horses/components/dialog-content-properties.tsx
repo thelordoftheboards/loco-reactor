@@ -1,4 +1,4 @@
-import { useHorse } from '../hooks/useHorse'
+import { useHorse } from '../hooks/use-horse'
 import { PropertiesForm } from './properties-form'
 import {
   DialogContent,
