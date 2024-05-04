@@ -5,8 +5,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { Dispatch } from 'react'
 
-export function DialogContentProperties() {
+export function DialogContentProperties({
+  setOpen,
+}: {
+  setOpen: Dispatch<React.SetStateAction<boolean>>
+}) {
   return (
     <DialogContent className='sm:max-w-[425px]'>
       <DialogHeader>
@@ -16,47 +21,7 @@ export function DialogContentProperties() {
         </DialogDescription>
       </DialogHeader>
 
-      <PropertiesForm />
-
-      {/*
-      <div className='grid gap-4 py-4'>
-        <div className='grid grid-cols-4 items-center gap-4'>
-          <Label htmlFor='given_name' className='text-right'>
-            Name
-          </Label>
-          <Input
-            id='given_name'
-            placeholder='Sea Buiscit'
-            className='col-span-3'
-          />
-        </div>
-        <div className='grid grid-cols-4 items-center gap-4'>
-          <Label htmlFor='gender' className='text-right'>
-            Gender
-          </Label>
-          <Input
-            id='gender'
-            type='number'
-            defaultValue='1'
-            className='col-span-3'
-          />
-        </div>
-        <div className='grid grid-cols-4 items-center gap-4'>
-          <Label htmlFor='color' className='text-right'>
-            Color
-          </Label>
-          <Input
-            id='color'
-            type='number'
-            defaultValue='1'
-            className='col-span-3'
-          />
-        </div>
-      </div>
-      <DialogFooter>
-        <Button type='submit'>Save changes</Button>
-      </DialogFooter>
-      */}
+      <PropertiesForm setOpen={setOpen} />
     </DialogContent>
   )
 }

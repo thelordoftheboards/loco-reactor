@@ -11,13 +11,15 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { HTMLAttributes, useState } from 'react'
+import { Dispatch, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-interface UserAuthFormProps extends HTMLAttributes<HTMLDivElement> {}
-
-export function PropertiesForm({ className, ...props }: UserAuthFormProps) {
+export function PropertiesForm({
+  setOpen,
+}: {
+  setOpen: Dispatch<React.SetStateAction<boolean>>
+}) {
   const [isLoading, setIsLoading] = useState(false)
   const addHorseMutation = useAddHorseMutation()
 
@@ -42,6 +44,8 @@ export function PropertiesForm({ className, ...props }: UserAuthFormProps) {
     }
 
     setIsLoading(false)
+
+    setOpen(false)
   }
 
   //     <div className={cn('grid gap-6', className)} {...props}>
