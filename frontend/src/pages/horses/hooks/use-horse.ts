@@ -39,6 +39,7 @@ export const useHorse = (id: number): IUseHorse => {
     queryKey: [QUERY_KEY.horse, id],
     queryFn: () => fetchHorse(id),
     refetchOnWindowFocus: false,
+    gcTime: 0, // Since we want the most up-to-date data for the horse when editing the properties
     retry: 2,
   })
 
