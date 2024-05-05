@@ -24,9 +24,9 @@ export function DialogContentProperties({
   return (
     <DialogContent className='sm:max-w-[425px]'>
       <DialogHeader>
-        <DialogTitle>Edit Horse</DialogTitle>
+        <DialogTitle>{id === 0 ? 'New' : 'Edit' + ' Horse'}</DialogTitle>
         <DialogDescription>
-          Make changes to your horse here. Click save when you're done.
+          {id === 0 ? 'Add a new horse' : 'Make changes to horse.'}
         </DialogDescription>
       </DialogHeader>
 
