@@ -85,12 +85,6 @@ export const sidelinks: SideLink[] = [
     icon: <IconRouteAltLeft size={18} />,
     sub: [
       {
-        title: 'Coming soon',
-        label: '',
-        href: '/coming-soon',
-        icon: <IconChartHistogram size={18} />,
-      },
-      {
         title: 'Extra Components',
         label: '',
         href: '/extra-components',
