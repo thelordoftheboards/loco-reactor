@@ -38,9 +38,8 @@ export async function apiGet(
     return await processResponse(response)
   } catch (err) {
     throw new ResponseError(
-      'Request to server failed with exception: ' +
-        (err instanceof Error ? err.message : 'unknown') +
-        ', please try again.',
+      'Request to server failed because: ' +
+        (err instanceof Error ? err.message : 'unknown'),
       null
     )
   }
@@ -63,9 +62,8 @@ export async function apiCall(
     return await processResponse(response)
   } catch (err) {
     throw new ResponseError(
-      'Request to server failed with exception: ' +
-        (err instanceof Error ? err.message : 'unknown') +
-        ', please try again.',
+      'Request to server failed because: ' +
+        (err instanceof Error ? err.message : 'unknown'),
       null
     )
   }
@@ -100,23 +98,19 @@ async function processResponse(response: Response): Promise<object> {
 
   if (json_error) {
     throw new ResponseError(
-      'The response from the server could not be read, please try again.',
+      'The response from the server could not be read.',
       null
     )
   } else if (value && (value.error_id || value.error_message)) {
     throw new ResponseError(value.error_message ?? value.error_id, value)
   } else if (!response.ok) {
     throw new ResponseError(
-      'Request to server failed with status ' +
-        response.status +
-        ', please try again.',
+      'Server response was not ok, status ' + response.status + '.',
       null
     )
   } else if (response.status !== 200) {
     throw new ResponseError(
-      'Request to server returned unacceptable status ' +
-        response.status +
-        ', please try again.',
+      'Server responded with unacceptable status ' + response.status + '.',
       null
     )
   }
