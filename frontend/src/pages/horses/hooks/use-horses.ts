@@ -16,7 +16,8 @@ interface IUseHorses {
 
 function mapError(error: unknown): string {
   if (error instanceof ResponseError) return error.message
-  return 'Unknown error'
+  if (error instanceof Error) return 'Unexpected error: ' + error.message
+  return ''
 }
 
 export const useHorses = (): IUseHorses => {

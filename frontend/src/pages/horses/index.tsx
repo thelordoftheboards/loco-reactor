@@ -8,7 +8,7 @@ import ThemeSwitch from '@/components/theme-switch'
 import { UserNav } from '@/components/user-nav'
 import { withAuthedUser } from '@/components/with-authed-user'
 
-function Horses() {
+function HorsesWrapped() {
   const { horses, isLoading, isFetching, error } = useHorses()
 
   return (
@@ -36,4 +36,5 @@ function Horses() {
   )
 }
 
-export default withAuthedUser(Horses)
+const Horses = withAuthedUser(HorsesWrapped)
+export default Horses

@@ -1,6 +1,5 @@
 import {
   IconBarrierBlock,
-  IconChartHistogram,
   IconChecklist,
   IconComponents,
   IconError404,

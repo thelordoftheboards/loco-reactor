@@ -1,5 +1,7 @@
 import { useHorse } from '../hooks/use-horse'
 import { PropertiesForm } from './properties-form'
+import Error from '@/components/error'
+import Loader from '@/components/loader'
 import {
   DialogContent,
   DialogDescription,
@@ -15,12 +17,9 @@ export function DialogContentProperties({
   id: number
   setOpen: Dispatch<React.SetStateAction<boolean>>
 }) {
-  const {
-    horse,
-    // isLoading: isLoadingHorse,
-    // isFetching: isFetchingHorse,
-    // error: errorHorse,
-  } = useHorse(id)
+  const { horse, isLoading, isFetching, error } = useHorse(id)
+
+  console.log({ horse, isLoading, isFetching, error })
 
   return (
     <DialogContent className='sm:max-w-[425px]'>
@@ -31,7 +30,13 @@ export function DialogContentProperties({
         </DialogDescription>
       </DialogHeader>
 
-      {horse && <PropertiesForm setOpen={setOpen} horse={horse} />}
+      {error ? (
+        <Error message={error} />
+      ) : !horse || isLoading || isFetching ? (
+        <Loader />
+      ) : (
+        <>{horse && <PropertiesForm setOpen={setOpen} horse={horse} />}</>
+      )}
     </DialogContent>
   )
 }

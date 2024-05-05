@@ -1,7 +1,7 @@
 import { horseSchema } from '../data/schema'
 import { DialogContentProperties } from './dialog-content-properties'
 import { Button } from '@/components/custom/button'
-import { Dialog, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog } from '@/components/ui/dialog'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -52,7 +52,9 @@ export function DataTableRowActions<TData>({
       </DropdownMenu>
 
       <Dialog open={openProperties} onOpenChange={setOpenProperties}>
-        {openProperties && <DialogContentProperties id={horse.id} setOpen={setOpenProperties} />}
+        {openProperties && (
+          <DialogContentProperties id={horse.id} setOpen={setOpenProperties} />
+        )}
       </Dialog>
     </>
   )
