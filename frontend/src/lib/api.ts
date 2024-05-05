@@ -106,6 +106,7 @@ async function processResponse(response: Response): Promise<object> {
   } else if (!response.ok) {
     throw new ResponseError('Status ' + response.status + '.', null)
   } else if (response.status !== 200) {
+    // TODO Consider 201 is acceptable when created, 204 might make sense too. Reference: https://www.restapitutorial.com/lessons/httpmethods.html
     throw new ResponseError(
       'Server responded with unacceptable status ' + response.status + '.',
       null

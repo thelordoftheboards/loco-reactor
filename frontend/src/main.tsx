@@ -1,4 +1,4 @@
-import { queryClient } from './react-query/client'
+import { queryClient } from './lib/query-client'
 import { ThemeProvider } from '@/components/theme-provider'
 import { Toaster } from '@/components/ui/toaster'
 import '@/index.css'

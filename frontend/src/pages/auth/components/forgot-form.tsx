@@ -1,4 +1,4 @@
-import { apiCall } from '../../../utils/api'
+import { apiCall } from '../../../lib/api'
 import ClearAuthedUser from './clear-authed-user'
 import { Button } from '@/components/custom/button'
 import {

@@ -1,7 +1,7 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import { toast } from '@/components/ui/use-toast'
+import { apiCall, ResponseError } from '@/lib/api'
 import { Horse } from '@/models/horse'
-import { apiCall, ResponseError } from '@/utils/api'
 import {
   UseMutationResult,
   useMutation,

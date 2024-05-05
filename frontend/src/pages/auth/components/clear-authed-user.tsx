@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import * as userLocalStorage from '../../../hooks/authed-user.localstore'
-import { queryClient } from '../../../react-query/client'
+import { queryClient } from '../../../lib/query-client'
 import { useEffect } from 'react'
 
 export default function ClearAuthedUser() {

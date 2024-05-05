@@ -1,7 +1,7 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
 import * as userLocalStorage from '../../../hooks/authed-user.localstore'
-import { queryClient } from '../../../react-query/client'
-import { apiCall } from '../../../utils/api'
+import { apiCall } from '../../../lib/api'
+import { queryClient } from '../../../lib/query-client'
 import { Button } from '@/components/custom/button'
 import {
   Form,

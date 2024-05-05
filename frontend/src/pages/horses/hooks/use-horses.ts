@@ -1,6 +1,6 @@
 import { QUERY_KEY } from '../../../constants/queryKeys'
+import { apiGet, ResponseError } from '@/lib/api'
 import { Horse } from '@/models/horse'
-import { apiGet, ResponseError } from '@/utils/api'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchHorses = async (): Promise<Horse[]> => {
