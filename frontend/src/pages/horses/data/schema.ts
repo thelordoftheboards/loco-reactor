@@ -5,8 +5,8 @@ import { z } from 'zod'
 export const horseSchema = z.object({
   id: z.number(),
   given_name: z.string(),
-  gender_id: z.number(),
-  color_id: z.number(),
+  gender_id: z.coerce.number(),
+  color_id: z.coerce.number(),
 })
 
 export type Horse = z.infer<typeof horseSchema>

@@ -1,3 +1,4 @@
+import { HorseGeners } from '../data/horse-genders'
 import { horseSchema } from '../data/schema'
 import { useAddHorseMutation } from '../hooks/use-add-horse-mutation'
 import { useUpdateHorseMutation } from '../hooks/use-update-horse-mutation'
@@ -5,12 +6,20 @@ import { Button } from '@/components/custom/button'
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 import { Horse } from '@/models/horse'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Dispatch, useState } from 'react'
@@ -71,21 +80,67 @@ export function PropertiesForm({
                   </FormItem>
                 )}
               />
+
               <FormField
                 control={form.control}
                 name='gender_id'
                 render={({ field }) => (
-                  <FormItem className='space-y-1'>
-                    <div className='flex items-center justify-between'>
-                      <FormLabel>Gender</FormLabel>
-                    </div>
-                    <FormControl>
-                      <Input placeholder='mare' {...field} />
-                    </FormControl>
+                  <FormItem>
+                    <FormLabel>Gender</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={'' + field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select a verified email to display' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {HorseGeners.map((horse_gender) => (
+                          <SelectItem
+                            key={horse_gender.id}
+                            value={'' + horse_gender.id}
+                          >
+                            {horse_gender.name}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+
+              <FormField
+                control={form.control}
+                name='color_id'
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Color</FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={'' + field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder='Select a verified email to display' />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value='1'>1</SelectItem>
+                        <SelectItem value='2'>2</SelectItem>
+                        <SelectItem value='3'>3</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormDescription>
+                      Choose the closest appropriate color.
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <Button className='mt-2' loading={isLoadingForm}>
                 {horse.id === 0 ? 'Add New' : 'Save'}
               </Button>
