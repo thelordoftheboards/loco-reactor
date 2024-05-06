@@ -1,4 +1,4 @@
-import { QUERY_KEY } from '../../../constants/queryKeys'
+import { QUERY_KEY } from '../../../lib/query-keys'
 import { apiGet, ResponseError } from '@/lib/api'
 import { Horse } from '@/models/horse'
 import { useQuery } from '@tanstack/react-query'

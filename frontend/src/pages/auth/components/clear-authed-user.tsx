@@ -1,4 +1,4 @@
-import { QUERY_KEY } from '../../../constants/queryKeys'
+import { QUERY_KEY } from '../../../lib/query-keys'
 import * as userLocalStorage from '../../../hooks/authed-user.localstore'
 import { queryClient } from '../../../lib/query-client'
 import { useEffect } from 'react'

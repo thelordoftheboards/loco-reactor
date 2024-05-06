@@ -1,4 +1,4 @@
-import { QUERY_KEY } from '../constants/queryKeys'
+import { QUERY_KEY } from '../lib/query-keys'
 import * as userLocalStorage from './authed-user.localstore'
 import { useQuery } from '@tanstack/react-query'
 import { useEffect } from 'react'
