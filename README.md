@@ -3,6 +3,10 @@
 > [!NOTE]
 > Tokio, from my heart through my soul feel the energy flow
 
+# Documentation
+
+https://scriptbenders.com/boilerplates/loco-reactor/
+
 # Resources and Inspiration
 
 The frontend is cloned from [Shadcn Admin Dashboard](https://github.com/satnaing/shadcn-admin). The backend is generated with the [Loco](https://loco.rs/) SaaS template. Additional resources:
