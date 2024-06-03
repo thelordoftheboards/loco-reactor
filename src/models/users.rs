@@ -206,12 +206,12 @@ impl super::_entities::users::Model {
         // TODO Validate email_lc with regular expression to ensure it is a valid email
 
         if users::Entity::find()
-        .filter(
-            model::query::condition()
-                .eq(users::Column::Email, email_lc)
-                .build(),
-        )
-        .one(&txn)
+            .filter(
+                model::query::condition()
+                    .eq(users::Column::Email, email_lc)
+                    .build(),
+            )
+            .one(&txn)
             .await?
             .is_some()
         {

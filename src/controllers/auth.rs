@@ -1,4 +1,4 @@
-use axum::{debug_handler,http::StatusCode, response::Response};
+use axum::{debug_handler, http::StatusCode, response::Response};
 use loco_rs::model::ModelError;
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
