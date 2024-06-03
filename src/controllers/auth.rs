@@ -1,4 +1,4 @@
-use axum::{http::StatusCode, response::Response};
+use axum::{debug_handler,http::StatusCode, response::Response};
 use loco_rs::model::ModelError;
 use loco_rs::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -32,6 +32,7 @@ pub struct ResetParams {
 
 /// Creates a new user with the given parameters and sends a
 /// welcome email to the user
+#[debug_handler]
 async fn sign_up(
     State(ctx): State<AppContext>,
     Json(params): Json<AuthSignUpParams>,
@@ -103,6 +104,7 @@ async fn sign_up(
 
 /// Verify register user. if the user not verified his email, he can't sign in to
 /// the system.
+#[debug_handler]
 async fn verify(
     State(ctx): State<AppContext>,
     Json(params): Json<VerifyParams>,
@@ -160,6 +162,7 @@ async fn verify(
 /// and send email to the user. In case the email not found in our DB, we are
 /// returning a valid request for for security reasons (not exposing users DB
 /// list).
+#[debug_handler]
 async fn forgot(
     State(ctx): State<AppContext>,
     Json(params): Json<ForgotParams>,
@@ -184,6 +187,7 @@ async fn forgot(
 /// email to the user. In case the email not found in our DB, we are
 /// returning a valid request for for security reasons (not exposing users DB
 /// list).
+#[debug_handler]
 async fn resend(
     State(ctx): State<AppContext>,
     Json(params): Json<ForgotParams>,
@@ -205,6 +209,7 @@ async fn resend(
 }
 
 /// Reset user password by the given parameters
+#[debug_handler]
 async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -> Result<Response> {
     let Ok(user) = users::Model::find_by_reset_token(&ctx.db, &params.token).await else {
         // we don't want to expose our users email. if the email is invalid we still
@@ -221,6 +226,7 @@ async fn reset(State(ctx): State<AppContext>, Json(params): Json<ResetParams>) -
 }
 
 /// Creates a user record and returns authed user
+#[debug_handler]
 async fn sign_in(
     State(ctx): State<AppContext>,
     Json(params): Json<AuthSignInParams>,

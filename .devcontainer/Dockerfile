@@ -1,9 +1,9 @@
 FROM mcr.microsoft.com/devcontainers/rust:1
 
-# Install postgresql-client and sea-orm-cli
+# Install postgresql-client, sea-orm-cli, others
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
      && apt-get -y install --no-install-recommends postgresql-client \
-     && cargo install sea-orm-cli cargo-insta \
+     && cargo install sea-orm-cli cargo-insta cargo-watch concurrently \
      && chown -R vscode /usr/local/cargo
 
 # Install Node.js and npm
